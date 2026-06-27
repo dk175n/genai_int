@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · LLM Basics — GenAI Interview Hub</title>
+<meta name="description" content="Fundamentals that open most screening rounds.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>01 · LLM Basics</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · LLM Basics</h1>
+<p class="lead">Fundamentals that open most screening rounds.</p>
+<div class="meta-row"><span class="pill purple">LLM Basics</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="what-is-an-llm-and-how-does-it-generate-text-0"><summary><span class="q-text"><span class="qx">Q</span><span>What is an LLM and how does it generate text?</span></span><span class="q-tags"><span class="qtag beginner">Beginner</span><span class="qtag ">screening</span><span class="qtag ">Mid</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Why this is asked now</h5><p>It's the foundation every other answer builds on; interviewers check you actually understand the mechanism.</p><h5>Model answer</h5><p>An LLM is a model that predicts the next word (token) in a sequence. It generates text by doing this repeatedly:</p><ul><li>You give it some text (the prompt).</li><li>It outputs a probability for every possible next token.</li><li>It picks one, adds it to the text, and repeats until done.</li><li>It keeps no memory between calls — each request only knows what you send it.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior adds why this matters: because it's stateless, you must re-send chat history and any retrieved context every call; and because it predicts plausibility (not truth), quality is statistical — which is why we add retrieval, evaluation and guardrails.</p></div><h5>Likely follow-ups</h5><ul><li>Why is it stateless?</li><li>Where does the 'knowledge' come from?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Describing it as a database or search engine that 'looks up' answers.</div><h5>Related hands-on task / project</h5><p><a href='../pages/core-foundations.html'>Core Foundations</a>.</p></div></details><details class="qcard" id="why-do-llms-hallucinate-1"><summary><span class="q-text"><span class="qx">Q</span><span>Why do LLMs hallucinate?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">screening</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Why this is asked now</h5><p>It connects directly to RAG, evaluation and guardrails — the topics interviewers care most about.</p><h5>Model answer</h5><p>Because the model generates the most <em>plausible-sounding</em> continuation, not necessarily the <em>true</em> one. When the likely text isn't the correct text, it still says it confidently.</p><p>You reduce it (you can't fully remove it) by:</p><ul><li>Grounding answers in retrieved sources (RAG).</li><li>Telling it to cite sources and say 'I don't know' when unsure.</li><li>Lowering temperature for factual tasks.</li><li>Validating the answer against the source before showing it.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior treats hallucination as a measurable number (a 'faithfulness' or 'groundedness' score), monitors it in production, and fixes it with architecture and evaluation — not by adding 'please don't hallucinate' to the prompt.</p></div><h5>Likely follow-ups</h5><ul><li>How would you measure hallucination?</li><li>What if retrieval finds nothing relevant?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'You just tell it not to hallucinate in the prompt.'</div><h5>Related hands-on task / project</h5><p><a href='../pages/core-foundations.html#questions'>Foundations questions</a>.</p></div></details><details class="qcard" id="explain-temperature-and-top-p-2"><summary><span class="q-text"><span class="qx">Q</span><span>Explain temperature and top-p.</span></span><span class="q-tags"><span class="qtag beginner">Beginner</span><span class="qtag ">screening</span><span class="qtag ">Mid</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Why this is asked now</h5><p>A quick check that you've actually worked with the API knobs.</p><h5>Model answer</h5><p>Both control how random the model's output is.</p><ul><li><strong>Temperature</strong> — higher = more random/creative, lower = more focused/repeatable.</li><li><strong>top-p</strong> — only sample from the most likely tokens that together cover p% of the probability.</li><li>Use <strong>low</strong> (0–0.3) for extraction, classification or JSON; <strong>higher</strong> (0.7–1.0) for brainstorming or creative writing.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior defaults to low temperature in production because it makes output reproducible and easy to evaluate, and only raises it where variety is genuinely the goal.</p></div><h5>Likely follow-ups</h5><ul><li>Which would you use for JSON extraction and why?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Using high temperature for structured/extraction tasks.</div></div></details><details class="qcard" id="what-is-the-context-window-and-why-does-it-constrain-design-3"><summary><span class="q-text"><span class="qx">Q</span><span>What is the context window and why does it constrain design?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Why this is asked now</h5><p>It directly shapes how you design RAG and chat memory.</p><h5>Model answer</h5><p>The context window is the maximum amount of text (tokens) the model can take in plus produce in a single call. It matters because:</p><ul><li>Everything competes for that space — system prompt, chat history, and any retrieved documents.</li><li>You pay per token and latency grows as it fills up.</li><li>Very long contexts can lose accuracy in the middle ('lost in the middle').</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior budgets the window deliberately — caps history, reranks retrieved context down to the few most relevant chunks — and knows that a bigger window isn't automatically better quality; relevance and placement matter more than raw size.</p></div><h5>Likely follow-ups</h5><ul><li>What is 'lost in the middle'?</li><li>How do you decide how many chunks to include?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Thinking the model remembers previous calls without you re-sending context.</div></div></details>
+<div class="page-nav"><a href="../qbank/index.html"><div class="dir">← Previous</div><div class="ttl">Question Bank — Overview</div></a><a class="next" href="../qbank/prompt-engineering.html"><div class="dir">Next →</div><div class="ttl">Prompt Engineering</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

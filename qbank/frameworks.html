@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · LangChain / LangGraph / LlamaIndex — GenAI Interview Hub</title>
+<meta name="description" content="Framework questions — answer them as 'tools with tradeoffs', never as fandom.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>06 · LangChain / LangGraph / LlamaIndex</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · LangChain / LangGraph / LlamaIndex</h1>
+<p class="lead">Framework questions — answer them as 'tools with tradeoffs', never as fandom.</p>
+<div class="meta-row"><span class="pill purple">LangChain / LangGraph / LlamaIndex</span><span class="pill ">3 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (3)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="when-would-you-use-langgraph-over-plain-orchestration-0"><summary><span class="q-text"><span class="qx">Q</span><span>When would you use LangGraph over plain orchestration?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>LangGraph models an agent as a graph of nodes and edges with explicit shared state. Reach for it when you need:</p><ul><li>Explicit state passed between steps.</li><li>Conditional routing (different next step based on results).</li><li>Checkpointing — retry/resume a single step, not the whole run.</li><li>Human-in-the-loop approval at certain points.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior uses it for control and observability but notes you can achieve the same with disciplined plain Python — the framework is a convenience, not the architecture.</p></div><h5>Likely follow-ups</h5><ul><li>What does the checkpointer give you?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Using it just because it's popular, with no reason.</div><h5>Related hands-on task / project</h5><p><a href='../pages/agentic-ai.html'>Agentic AI</a>.</p><h5>Source / evidence</h5><p><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">LangGraph docs</a></p></div></details><details class="qcard" id="langchain-vs-llamaindex-how-do-you-frame-the-difference-1"><summary><span class="q-text"><span class="qx">Q</span><span>LangChain vs LlamaIndex — how do you frame the difference?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>LangChain</strong> — broad orchestration toolkit (chains, agents, integrations).</li><li><strong>LlamaIndex</strong> — centered on data indexing and retrieval for RAG.</li><li>Both are conveniences layered over the same underlying primitives (LLM calls, embeddings, vector search).</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior picks by fit, keeps the abstraction thin, and is willing to drop to the raw API when the framework hides too much.</p></div><h5>Likely follow-ups</h5><ul><li>When do frameworks hurt you?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Treating a framework as the system instead of a tool.</div></div></details><details class="qcard" id="what-s-the-risk-of-heavy-framework-abstraction-in-production-2"><summary><span class="q-text"><span class="qx">Q</span><span>What's the risk of heavy framework abstraction in production?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Heavy abstractions can:</p><ul><li>Hide the actual prompts and control flow, making debugging hard.</li><li>Make cost and latency harder to see and control.</li><li>Break on version upgrades.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior keeps a clean seam so the framework is replaceable, and traces exactly what gets sent to the model regardless of the framework.</p></div><h5>Likely follow-ups</h5><ul><li>How do you see what the framework actually sends the model?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Having no idea what prompt the framework is actually sending.</div></div></details>
+<div class="page-nav"><a href="../qbank/agentic-ai.html"><div class="dir">← Previous</div><div class="ttl">Agentic AI</div></a><a class="next" href="../qbank/llm-evaluation.html"><div class="dir">Next →</div><div class="ttl">LLM Evaluation</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (3)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

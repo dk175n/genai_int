@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mock · RAG Deep-Dive Round — GenAI Interview Hub</title>
+<meta name="description" content="A 45-minute simulated RAG deep-dive. The interviewer opens broad, then drills into retrieval quality, chunking, hallucination and evaluation — the four pla">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Mocks & Revision / <b>02 · RAG Mock Interview</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Mock Interviews</div>
+<h1>Mock · RAG Deep-Dive Round</h1>
+<p class="lead">A 45-minute simulated RAG deep-dive. The interviewer opens broad, then drills into retrieval quality, chunking, hallucination and evaluation — the four places RAG candidates crack.</p>
+<div class="meta-row"><span class="pill blue">Technical deep-dive</span></div>
+<h2 id="intro">Overview</h2><p>Tests whether you've <em>built and debugged</em> RAG, not just read about it. Strong candidates separate retrieval from generation, cite metrics, and lead with tradeoffs. Pair with <a href='../pages/rag-mastery.html'>RAG Mastery</a>.</p>
+<h2 id="script">Interviewer script</h2><p>“Tell me about a RAG system you built.” → “Walk me through the pipeline.” → “Your retrieval returns junk — debug it.” → “How would you know it's good?” → “When would you not use RAG?” Probe each answer twice; if they stay at demo-level, push to production concerns.</p>
+<h2 id="timing">Timing plan</h2><div class="table-wrap"><table><thead><tr><th>Min</th><th>Segment</th></tr></thead><tbody><tr><td>0–5</td><td>Project intro + clarify</td></tr><tr><td>5–20</td><td>Pipeline walkthrough + chunking/retrieval drill</td></tr><tr><td>20–35</td><td>Hallucination + evaluation</td></tr><tr><td>35–45</td><td>Tradeoffs + follow-ups + debrief</td></tr></tbody></table></div>
+<h2 id="questions">Questions</h2><details class="qcard" id="walk-me-through-your-rag-pipeline-and-where-it-most-commonly-0"><summary><span class="q-text"><span class="qx">Q</span><span>Walk me through your RAG pipeline and where it most commonly fails.</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Offline: load, chunk, embed, index the documents. Online: retrieve relevant chunks (hybrid: semantic + keyword), rerank, put them in the prompt with a 'answer only from this context' instruction, generate with citations, then validate.</p><p>It most commonly fails at <strong>retrieval</strong> — if the right chunks aren't found, no amount of model quality helps.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A strong answer separates retrieval failures from generation failures, names hybrid search + reranking as the fix for poor retrieval, and describes evaluating both halves.</p></div><h5>Likely follow-ups</h5><ul><li>Why those chunk sizes?</li><li>Hybrid or semantic-only — and why?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Describing only embed → cosine search → stuff into the prompt, with no reranking or evaluation.</div></div></details><details class="qcard" id="retrieval-looks-fine-but-the-answers-are-still-wrong-what-no-1"><summary><span class="q-text"><span class="qx">Q</span><span>Retrieval looks fine but the answers are still wrong — what now?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>If the right chunks were retrieved, it's a generation problem. Likely causes: the prompt doesn't force context-only answers, too much context dilutes the answer ('lost in the middle'), or chunks contradict each other.</p><p>Fixes: use fewer, reranked chunks; add a strict 'cite or say I don't know' instruction; resolve conflicts explicitly.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A strong answer isolates the layers first (by logging the retrieved chunks) and verifies the fix with a faithfulness metric, rather than guessing.</p></div><h5>Likely follow-ups</h5><ul><li>What is 'lost in the middle'?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Immediately swapping to a bigger/more expensive model without isolating the cause.</div></div></details><details class="qcard" id="how-do-you-evaluate-this-and-gate-deploys-2"><summary><span class="q-text"><span class="qx">Q</span><span>How do you evaluate this and gate deploys?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Build a small 'golden' set of test questions with expected answers. Measure retrieval (recall@k) and generation (faithfulness) separately. Run it automatically on every change and block the deploy if quality drops.</p><p>Also sample real production traffic and score it the same way.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A strong answer calibrates the LLM judge against human labels and grows the test set from real production failures.</p></div><h5>Likely follow-ups</h5><ul><li>How big should the golden set be?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'We just eyeball a few answers.'</div></div></details>
+<h2 id="strong">Expected answer signals (strong)</h2><ul><li>Separates retrieval from generation</li><li>Quotes recall@k / faithfulness</li><li>Names hybrid + rerank + abstain unprompted</li><li>Knows when RAG is the wrong tool</li></ul>
+<h2 id="weak">Weak answer signals</h2><ul><li>Conflates retrieval & generation failures</li><li>No metrics</li><li>'Just use a bigger model'</li><li>No abstain/citation story</li></ul>
+<h2 id="rubric">Scoring rubric</h2><div class="table-wrap"><table><thead><tr><th>Dimension</th><th>1–2 (weak)</th><th>3 (solid)</th><th>4–5 (strong)</th></tr></thead><tbody><tr><td>Correctness</td><td>Wrong/vague core concepts</td><td>Mostly correct</td><td>Precise, with nuance</td></tr><tr><td>Tradeoffs</td><td>None mentioned</td><td>Names some</td><td>Leads with them, justifies</td></tr><tr><td>Production thinking</td><td>Demo-level</td><td>Mentions eval/cost/safety</td><td>Designs for them by default</td></tr><tr><td>Communication</td><td>Rambles / no structure</td><td>Structured</td><td>Crisp, time-boxed, checks in</td></tr><tr><td>Depth on follow-ups</td><td>Folds under probing</td><td>Holds for one layer</td><td>Holds 2–3 layers deep</td></tr></tbody></table></div>
+<h2 id="debrief">Debrief checklist</h2><ul class="checklist"><li>Did I split retrieval vs generation?</li><li>Did I cite metrics?</li><li>Did I lead with tradeoffs?</li><li>Did I hold up on the 2nd follow-up?</li></ul>
+<div class="page-nav"><a href="../mocks/weekly-plan.html"><div class="dir">← Previous</div><div class="ttl">Weekly Mock Interview Plan</div></a><a class="next" href="../mocks/agent-mock.html"><div class="dir">Next →</div><div class="ttl">Agent Mock Interview</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#intro">Overview</a><a href="#script">Interviewer script</a><a href="#timing">Timing plan</a><a href="#questions">Questions</a><a href="#strong">Expected answer signals (strong)</a><a href="#weak">Weak answer signals</a><a href="#rubric">Scoring rubric</a><a href="#debrief">Debrief checklist</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

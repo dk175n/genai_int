@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design · Document Q&amp;A for Legal / Finance / HR — GenAI Interview Hub</title>
+<meta name="description" content="RAG for high-stakes, regulated domains: precise citations, strict abstain, auditability, and zero tolerance for confident fabrication. Accuracy and traceab">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">System Design / <b>03 · Document Q&A for Legal / Finance / HR</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> System Design</div>
+<h1>Design · Document Q&A for Legal / Finance / HR</h1>
+<p class="lead">RAG for high-stakes, regulated domains: precise citations, strict abstain, auditability, and zero tolerance for confident fabrication. Accuracy and traceability dominate.</p>
+<div class="meta-row"><span class="pill amber">High-stakes</span></div>
+<h2 id="intro">The brief</h2><p>Same RAG skeleton, but the cost of a wrong answer is legal/financial. Design priorities flip to precision, mandatory citations, conservative abstain, and full auditability — speed and cost are secondary.</p>
+<h2 id="clarify">Clarifying questions to ask first</h2><ul><li>What's the consequence of an incorrect answer (legal liability)?</li><li>Is human verification required before action?</li><li>Retention/audit and data-residency requirements?</li><li>How precise must citations be (clause/line level)?</li></ul>
+<h2 id="functional">Functional requirements</h2><ul><li>Answer only with precise, clause-level citations</li><li>Abstain readily; never guess</li><li>Full audit log of question, context, answer</li><li>Versioned documents (which version was cited)</li></ul>
+<h2 id="nonfunctional">Non-functional requirements</h2><ul><li>Very high faithfulness; near-zero unsupported claims</li><li>Auditability/retention compliance</li><li>Data residency / on-prem option</li><li>Reproducibility (same Q → same cited answer)</li></ul>
+<h2 id="architecture">Architecture</h2><div class="ragflow lr"><div class="rf"><div>Question</div></div><div class="arr"></div><div class="rf accent"><div>Retrieve (precise chunks)</div></div><div class="arr"></div><div class="rf"><div>Strict grounded answer + clause citation</div></div><div class="arr"></div><div class="rf"><div>Faithfulness gate</div></div><div class="arr"></div><div class="rf"><div>Audit log</div></div></div>
+<h2 id="ingestion">Data ingestion layer</h2><p>Version-aware ingestion (cite the exact document version); fine-grained chunks for clause-level citation; rich metadata (jurisdiction, effective date).</p>
+<h2 id="retrieval">Retrieval layer</h2><p>Hybrid with sparse weighted up (exact legal/financial terms matter); rerank; return precise spans for citation.</p>
+<h2 id="orchestration">Model / orchestration layer</h2><p>Very strict grounding: answer only from context, quote + cite the clause, abstain otherwise. Low temperature for reproducibility.</p>
+<h2 id="safety">Safety layer</h2><p>Mandatory citation presence; faithfulness gate blocks unsupported claims; PII/confidentiality controls; access control by matter/client.</p>
+<h2 id="evaluation">Evaluation layer</h2><p>Expert-labeled golden set; faithfulness + citation-correctness as hard gates; track unsupported-claim rate (target ~0).</p>
+<h2 id="observability">Observability layer</h2><p>Full immutable audit trail (question, retrieved version, answer, citations); monitor abstain rate and citation accuracy.</p>
+<h2 id="costlatency">Cost & latency tradeoffs</h2><div class="table-wrap"><table><thead><tr><th>Lever</th><th>Effect</th><th>Tradeoff</th></tr></thead><tbody><tr><td>Larger model</td><td>↑ accuracy</td><td>↑ cost — justified here</td></tr><tr><td>More verification passes</td><td>↑ faithfulness</td><td>↑ latency — acceptable</td></tr></tbody></table></div>
+<h2 id="failures">Failure modes</h2><ul><li>Confident fabrication → strict grounding + faithfulness gate + abstain</li><li>Citing wrong version → version-aware ingestion</li><li>Missing exact term → weight sparse retrieval</li><li>Audit gap → immutable logging</li></ul>
+<h2 id="tenmin">How to explain this design in 10 minutes</h2><p>Open by naming the stakes; emphasize precise citations, strict abstain, version-awareness and audit; treat faithfulness as a hard gate; accept higher cost/latency for accuracy; close with failure modes centered on fabrication.</p>
+<h2 id="interruptions">Common interviewer interruptions & how to answer</h2><div class="table-wrap"><table><thead><tr><th>Interviewer says…</th><th>How to answer</th></tr></thead><tbody><tr><td>“What if retrieval returns nothing relevant?”</td><td>Coverage gate → abstain or escalate; never force an answer. Measure abstain-correctness.</td></tr><tr><td>“This will be too expensive.”</td><td>Cache + route to a smaller model for easy traffic; show cost/req and that quality held on eval.</td></tr><tr><td>“How do you know it's any good?”</td><td>Golden set offline as a deploy gate + sampled online judging; split retrieval vs generation metrics.</td></tr><tr><td>“What about data the user shouldn't see?”</td><td>Access control enforced at retrieval, not the prompt; per-tenant filters or separate indexes.</td></tr><tr><td>“What happens when the model provider goes down?”</td><td>Timeouts, fallback model/provider, graceful degradation to cached/smaller answers.</td></tr></tbody></table></div>
+<h2 id="questions">Interview questions on this design (3)</h2><details class="qcard" id="how-do-you-design-rag-where-a-confident-wrong-answer-is-unac-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you design RAG where a confident wrong answer is unacceptable?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior/Staff</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Mandatory clause-level citations, a faithfulness gate that blocks unsupported claims, a conservative abstain policy, version-aware citations, and a full audit trail. Bias every tradeoff toward precision over coverage.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd add a verification pass (a second model checks each claim against its cited span) and human-in-the-loop before any action. I accept higher cost and latency and a higher abstain rate as the correct trade in a regulated domain.</p></div><h5>Likely follow-ups</h5><ul><li>Would you ever let it answer without a citation?</li><li>How do you make it reproducible?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Optimizing for coverage/UX in a domain where wrong answers create liability.</div></div></details><details class="qcard" id="how-do-you-handle-document-versions-and-effective-dates-in-a-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you handle document versions and effective dates in a legal/finance Q&A?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior/Staff</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Version-aware ingestion: keep each document version with effective/expiry dates in metadata, cite the exact version used, and filter retrieval to the version in force for the query's context (e.g. 'as of' date).</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior treats 'which version applied when' as a first-class requirement — citing the wrong version is as bad as a wrong answer in regulated domains — and keeps superseded versions queryable for audit.</p></div><h5>Likely follow-ups</h5><ul><li>How do you answer 'what was the policy last year'?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Indexing only the latest version and losing historical accuracy.</div></div></details><details class="qcard" id="why-add-a-separate-verification-pass-here-and-how-does-it-wo-2"><summary><span class="q-text"><span class="qx">Q</span><span>Why add a separate verification pass here, and how does it work?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior/Staff</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>A second model checks each claim in the answer against its cited source span and blocks/flags unsupported claims. In high-stakes domains the extra cost/latency is worth near-zero fabrication.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior accepts a higher abstain rate and latency as the correct trade, and routes anything that fails verification to human review rather than to the user.</p></div><h5>Likely follow-ups</h5><ul><li>What's the latency/cost impact and is it acceptable?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Skipping verification to keep latency low in a liability-heavy domain.</div></div></details>
+<div class="page-nav"><a href="../systemdesign/customer-support-bot.html"><div class="dir">← Previous</div><div class="ttl">Customer Support Bot</div></a><a class="next" href="../systemdesign/code-assistant-agent.html"><div class="dir">Next →</div><div class="ttl">Code Assistant Agent</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#intro">The brief</a><a href="#clarify">Clarifying questions to ask first</a><a href="#functional">Functional requirements</a><a href="#nonfunctional">Non-functional requirements</a><a href="#architecture">Architecture</a><a href="#ingestion">Data ingestion layer</a><a href="#retrieval">Retrieval layer</a><a href="#orchestration">Model / orchestration layer</a><a href="#safety">Safety layer</a><a href="#evaluation">Evaluation layer</a><a href="#observability">Observability layer</a><a href="#costlatency">Cost & latency tradeoffs</a><a href="#failures">Failure modes</a><a href="#tenmin">How to explain this design in 10 minutes</a><a href="#interruptions">Common interviewer interruptions & how to answer</a><a href="#questions">Interview questions on this design (3)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

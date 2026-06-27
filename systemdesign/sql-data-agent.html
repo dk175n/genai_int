@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design · SQL Data Agent — GenAI Interview Hub</title>
+<meta name="description" content="A natural-language analytics agent over a data warehouse: schema-aware text-to-SQL with a semantic layer, read-only governance, and result validation. Scal">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">System Design / <b>05 · SQL Data Agent</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> System Design</div>
+<h1>Design · SQL Data Agent</h1>
+<p class="lead">A natural-language analytics agent over a data warehouse: schema-aware text-to-SQL with a semantic layer, read-only governance, and result validation. Scales the SQL agent project to an enterprise design.</p>
+<div class="meta-row"><span class="pill amber">Agent + governance</span></div>
+<h2 id="intro">The brief</h2><p>Text-to-SQL at organizational scale. The hard parts are correctness on a big/ambiguous schema (semantic layer helps), governance (read-only, row-level security), and trust in results.</p>
+<h2 id="clarify">Clarifying questions to ask first</h2><ul><li>Warehouse (Snowflake/BigQuery/Postgres)?</li><li>Is there a semantic layer / metric definitions?</li><li>Row-level security needs?</li><li>Who consumes results — analysts or end users?</li></ul>
+<h2 id="functional">Functional requirements</h2><ul><li>NL → governed SQL with results + the SQL shown</li><li>Use a semantic layer / approved metrics</li><li>Charts/summaries</li><li>Save/share queries</li></ul>
+<h2 id="nonfunctional">Non-functional requirements</h2><ul><li>Read-only + RLS enforced</li><li>Query cost/row limits</li><li>Correctness on the schema</li><li>Auditability</li></ul>
+<h2 id="architecture">Architecture</h2><div class="ragflow lr"><div class="rf"><div>Question</div></div><div class="arr"></div><div class="rf accent"><div>Schema + semantic layer</div></div><div class="arr"></div><div class="rf"><div>Generate governed SQL</div></div><div class="arr"></div><div class="rf"><div>Validate + RLS + limits</div></div><div class="arr"></div><div class="rf"><div>Execute + summarize</div></div></div>
+<h2 id="ingestion">Data ingestion layer</h2><p>Index schema, column descriptions, and metric/semantic definitions; embed example question→SQL pairs for few-shot.</p>
+<h2 id="retrieval">Retrieval layer</h2><p>Retrieve relevant tables/columns/metrics for the question to ground SQL generation (RAG over the schema).</p>
+<h2 id="orchestration">Model / orchestration layer</h2><p>Generate SQL grounded in retrieved schema + semantic layer; self-check against schema; optionally repair on execution error (bounded).</p>
+<h2 id="safety">Safety layer</h2><p>Read-only role + row-level security; validate SELECT-only; enforce LIMIT/cost guards; parameterize; show SQL for transparency; audit every query.</p>
+<h2 id="evaluation">Evaluation layer</h2><p>Execution accuracy vs golden question→result set; safety (no unsafe/over-cost query passes); track repair rate.</p>
+<h2 id="observability">Observability layer</h2><p>Trace question→SQL→result; monitor accuracy, query cost, error/repair rate; alert on cost spikes.</p>
+<h2 id="costlatency">Cost & latency tradeoffs</h2><div class="table-wrap"><table><thead><tr><th>Lever</th><th>Effect</th><th>Tradeoff</th></tr></thead><tbody><tr><td>Semantic layer / approved metrics</td><td>↑ correctness</td><td>Upfront modeling effort</td></tr><tr><td>Cost/row limits</td><td>↓ runaway cost</td><td>Truncated results</td></tr></tbody></table></div>
+<h2 id="failures">Failure modes</h2><ul><li>Wrong joins/metrics → semantic layer + schema RAG + validation</li><li>Runaway/expensive query → cost guards + LIMIT</li><li>RLS bypass → enforce at DB role, not prompt</li><li>Hallucinated columns → ground + validate</li></ul>
+<h2 id="tenmin">How to explain this design in 10 minutes</h2><p>Clarify warehouse + semantic layer + governance; draw schema-RAG + governed generation + validation + RLS; stress read-only governance and correctness; cover accuracy eval; close with cost/failure modes.</p>
+<h2 id="interruptions">Common interviewer interruptions & how to answer</h2><div class="table-wrap"><table><thead><tr><th>Interviewer says…</th><th>How to answer</th></tr></thead><tbody><tr><td>“What if retrieval returns nothing relevant?”</td><td>Coverage gate → abstain or escalate; never force an answer. Measure abstain-correctness.</td></tr><tr><td>“This will be too expensive.”</td><td>Cache + route to a smaller model for easy traffic; show cost/req and that quality held on eval.</td></tr><tr><td>“How do you know it's any good?”</td><td>Golden set offline as a deploy gate + sampled online judging; split retrieval vs generation metrics.</td></tr><tr><td>“What about data the user shouldn't see?”</td><td>Access control enforced at retrieval, not the prompt; per-tenant filters or separate indexes.</td></tr><tr><td>“What happens when the model provider goes down?”</td><td>Timeouts, fallback model/provider, graceful degradation to cached/smaller answers.</td></tr></tbody></table></div>
+<h2 id="questions">Interview questions on this design (3)</h2><details class="qcard" id="how-do-you-get-correct-sql-on-a-large-ambiguous-schema-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you get correct SQL on a large, ambiguous schema?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>RAG over the schema + column/metric descriptions to ground generation, a semantic layer of approved metrics, few-shot example pairs, and a self-check/repair loop against execution errors. Validate before running.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>The semantic layer is the highest-leverage investment — it constrains the model to correct, governed definitions and removes most ambiguity. I measure execution accuracy on a golden set and treat governance (read-only, RLS) as non-negotiable.</p></div><h5>Likely follow-ups</h5><ul><li>How do you enforce row-level security?</li><li>How do you handle ambiguous metric definitions?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Free text-to-SQL with no schema grounding or governance.</div></div></details><details class="qcard" id="how-do-you-enforce-governance-read-only-row-level-security-o-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you enforce governance (read-only, row-level security) on a data agent?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior/Staff</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Enforce at the database, not the prompt: a read-only role, row-level security tied to the requesting user, query validation (SELECT-only), and cost/row limits. Show the generated SQL for transparency and audit-log every query.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior makes unsafe queries impossible by construction (least-privilege role) so governance holds regardless of what the model emits, and attributes query cost back to users.</p></div><h5>Likely follow-ups</h5><ul><li>What if a user needs write access?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Relying on the prompt to keep the agent read-only.</div></div></details><details class="qcard" id="how-do-you-stop-runaway-cost-queries-on-a-warehouse-2"><summary><span class="q-text"><span class="qx">Q</span><span>How do you stop runaway-cost queries on a warehouse?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Enforce LIMITs, query timeouts, and scanned-bytes/cost caps; validate before executing; prefer a semantic layer with pre-approved, bounded queries. Monitor and alert on cost spikes.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior sets a per-query cost ceiling and a dry-run/estimate step, because a single bad generated query can scan terabytes on systems billed by data scanned.</p></div><h5>Likely follow-ups</h5><ul><li>How do you estimate cost before running?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">No limits, letting a generated query scan the whole warehouse.</div></div></details>
+<div class="page-nav"><a href="../systemdesign/code-assistant-agent.html"><div class="dir">← Previous</div><div class="ttl">Code Assistant Agent</div></a><a class="next" href="../systemdesign/multi-agent-workflow.html"><div class="dir">Next →</div><div class="ttl">Multi-Agent Business Workflow</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#intro">The brief</a><a href="#clarify">Clarifying questions to ask first</a><a href="#functional">Functional requirements</a><a href="#nonfunctional">Non-functional requirements</a><a href="#architecture">Architecture</a><a href="#ingestion">Data ingestion layer</a><a href="#retrieval">Retrieval layer</a><a href="#orchestration">Model / orchestration layer</a><a href="#safety">Safety layer</a><a href="#evaluation">Evaluation layer</a><a href="#observability">Observability layer</a><a href="#costlatency">Cost & latency tradeoffs</a><a href="#failures">Failure modes</a><a href="#tenmin">How to explain this design in 10 minutes</a><a href="#interruptions">Common interviewer interruptions & how to answer</a><a href="#questions">Interview questions on this design (3)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · Prompt Engineering — GenAI Interview Hub</title>
+<meta name="description" content="Practical prompting and reliable API integration.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>02 · Prompt Engineering</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · Prompt Engineering</h1>
+<p class="lead">Practical prompting and reliable API integration.</p>
+<div class="meta-row"><span class="pill purple">Prompt Engineering</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="how-do-you-get-reliable-structured-json-output-from-an-llm-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you get reliable structured (JSON) output from an LLM?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">coding</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Don't try to extract JSON from free text with string parsing — it breaks. Instead:</p><ul><li>Define a schema (e.g. a Pydantic model).</li><li>Use the provider's structured-output / tool-calling feature and force it to use that schema.</li><li>Validate the result against the schema.</li><li>If validation fails, retry once or twice, feeding the error back to the model.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior treats the schema as the single source of truth, bounds the retries, keeps temperature low, and logs the schema-failure rate as a quality signal (a rising rate usually means a prompt or schema drift).</p></div><h5>Likely follow-ups</h5><ul><li>What do you do if it never produces valid output?</li><li>How does this interact with streaming?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Parsing JSON out of prose with regex/string operations and no validation.</div><h5>Related hands-on task / project</h5><p><a href='../pages/prompting-llm-apis.html#hands-on'>Prompting hands-on</a>.</p></div></details><details class="qcard" id="when-do-you-add-few-shot-examples-1"><summary><span class="q-text"><span class="qx">Q</span><span>When do you add few-shot examples?</span></span><span class="q-tags"><span class="qtag beginner">Beginner</span><span class="qtag ">screening</span><span class="qtag ">Mid</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Start with no examples (zero-shot). Add a few examples when:</p><ul><li>You need a consistent output format or style.</li><li>The task is ambiguous and examples clarify it.</li><li>Use a small number (1–3) of high-quality, varied examples — not a pile of mediocre ones.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior adds examples to fix a specific failure they've actually observed, and measures the trade-off (more examples = more tokens = more cost/latency). Often a clearer instruction or a schema beats adding examples.</p></div><h5>Likely follow-ups</h5><ul><li>What's the downside of too many examples?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Stuffing 20 examples 'to be safe' without measuring whether they help.</div></div></details><details class="qcard" id="what-is-chain-of-thought-and-when-is-it-worth-it-2"><summary><span class="q-text"><span class="qx">Q</span><span>What is chain-of-thought and when is it worth it?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Chain-of-thought = letting the model 'think step by step' before giving the final answer. It helps on multi-step reasoning (math, logic, planning).</p><ul><li>Use it for genuinely reasoning-heavy tasks.</li><li>Don't use it for simple lookups — it just adds cost and latency.</li><li>Hide the reasoning from end users; keep it internal.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior notes the cost/latency trade-off and that modern reasoning models often handle this internally, so explicit CoT is needed less than it used to be.</p></div><h5>Likely follow-ups</h5><ul><li>Do you show users the reasoning?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Adding 'think step by step' to every prompt, including trivial ones.</div></div></details><details class="qcard" id="how-do-you-manage-prompts-in-production-3"><summary><span class="q-text"><span class="qx">Q</span><span>How do you manage prompts in production?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Treat prompts as configuration, not code comments:</p><ul><li>Store them outside the code and version them.</li><li>A/B test changes instead of editing blindly.</li><li>Run them through your evaluation set before shipping — a prompt edit is a production change.</li><li>Be able to roll back to a previous prompt.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior keeps a prompt registry tied into the evaluation CI, so no prompt change ships without passing the golden set, and every version is traceable.</p></div><h5>Likely follow-ups</h5><ul><li>How would you A/B test a prompt?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Prompts buried as string literals in code with no versioning or testing.</div><h5>Related hands-on task / project</h5><p><a href='../pages/llmops-observability.html'>LLMOps</a>.</p></div></details>
+<div class="page-nav"><a href="../qbank/llm-basics.html"><div class="dir">← Previous</div><div class="ttl">LLM Basics</div></a><a class="next" href="../qbank/embeddings-vector-db.html"><div class="dir">Next →</div><div class="ttl">Embeddings & Vector DB</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

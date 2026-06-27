@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · LLMOps &amp; Observability — GenAI Interview Hub</title>
+<meta name="description" content="Backend engineers' edge. See also LLMOps.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>08 · LLMOps & Observability</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · LLMOps & Observability</h1>
+<p class="lead">Backend engineers' edge. See also <a href='../pages/llmops-observability.html#questions'>LLMOps</a>.</p>
+<div class="meta-row"><span class="pill purple">LLMOps & Observability</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="how-do-you-reduce-the-cost-of-an-llm-feature-without-hurting-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you reduce the cost of an LLM feature without hurting quality?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>Cache</strong> repeated queries (exact matches and semantically similar ones).</li><li><strong>Route</strong> easy requests to a cheaper/smaller model, reserve the big model for hard ones.</li><li><strong>Trim</strong> the prompt/context to what's needed.</li><li><strong>Batch</strong> offline work.</li><li>Always re-run your evaluation after a change so quality doesn't silently drop.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior measures cost-per-request first to optimize where the money actually is, and runs every cost change through the eval gate — never trading quality blindly.</p></div><h5>Likely follow-ups</h5><ul><li>How does semantic caching work and when is it risky?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Downgrading the model with no eval to confirm quality held.</div><h5>Related hands-on task / project</h5><p><a href='../projects/monitoring-dashboard.html'>Monitoring Dashboard</a>.</p></div></details><details class="qcard" id="what-do-you-trace-in-an-llm-app-and-why-1"><summary><span class="q-text"><span class="qx">Q</span><span>What do you trace in an LLM app, and why?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Trace the whole request as a tree of steps:</p><ul><li>Which chunks were retrieved.</li><li>The prompts and model calls.</li><li>Any tool calls.</li><li>Token counts, cost and latency per step.</li><li>Quality scores.</li></ul><p>This lets you debug why an answer was bad, slow, or expensive. Tools like Langfuse/LangSmith do this.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior attaches one trace id end-to-end and logs the retrieved context with every answer — that single habit makes most RAG debugging a quick lookup (was it retrieval or generation that failed?).</p></div><h5>Likely follow-ups</h5><ul><li>How do you handle PII in traces?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Logging only the final answer with no intermediate steps.</div><h5>Source / evidence</h5><p><a href="https://langfuse.com/docs" target="_blank" rel="noopener">Langfuse docs</a></p></div></details><details class="qcard" id="how-do-you-keep-the-feature-reliable-when-the-model-provider-2"><summary><span class="q-text"><span class="qx">Q</span><span>How do you keep the feature reliable when the model provider is slow or down?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li>Set timeouts and retries with backoff.</li><li>Have a fallback model or a second provider.</li><li>Handle rate limits gracefully.</li><li>Degrade gracefully — serve a cached or smaller-model answer, or an honest 'try again', instead of failing hard.</li><li>Use circuit breakers so you stop hammering a failing provider.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior designs provider failure as a normal event, with a fallback whose quality they've already validated on the eval set, and tiers of degradation under load.</p></div><h5>Likely follow-ups</h5><ul><li>How do you ensure the fallback model's quality is acceptable?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Assuming one provider with no fallback or timeout.</div></div></details><details class="qcard" id="how-do-you-cut-latency-for-a-rag-or-agent-app-3"><summary><span class="q-text"><span class="qx">Q</span><span>How do you cut latency for a RAG or agent app?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>Stream</strong> the answer so the user sees text immediately.</li><li>Run retrieval and independent tool calls <strong>in parallel</strong>.</li><li>Use a <strong>smaller/faster model</strong> where quality allows (check on eval).</li><li>Tighten retrieval so you process fewer chunks.</li><li><strong>Cache</strong> frequent results.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior optimizes p95 latency against a target SLO and measures per-step latency from traces first, so they fix the actual bottleneck.</p></div><h5>Likely follow-ups</h5><ul><li>What does streaming make harder?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Guessing at fixes without measuring where the time goes.</div></div></details>
+<div class="page-nav"><a href="../qbank/llm-evaluation.html"><div class="dir">← Previous</div><div class="ttl">LLM Evaluation</div></a><a class="next" href="../qbank/security-guardrails.html"><div class="dir">Next →</div><div class="ttl">Security / Guardrails</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

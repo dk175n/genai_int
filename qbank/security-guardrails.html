@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · Security / Guardrails — GenAI Interview Hub</title>
+<meta name="description" content="Increasingly a dedicated round. See also Guardrails &amp; Security.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>09 · Security / Guardrails</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · Security / Guardrails</h1>
+<p class="lead">Increasingly a dedicated round. See also <a href='../pages/guardrails-security.html#questions'>Guardrails & Security</a>.</p>
+<div class="meta-row"><span class="pill purple">Security / Guardrails</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="what-is-prompt-injection-and-how-do-you-defend-against-it-0"><summary><span class="q-text"><span class="qx">Q</span><span>What is prompt injection and how do you defend against it?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Prompt injection is when malicious instructions trick the model into ignoring its real instructions. Two forms:</p><ul><li><strong>Direct</strong> — the user types 'ignore previous instructions and…'.</li><li><strong>Indirect</strong> — hidden instructions inside a retrieved document or tool output that the model then follows. This is the dangerous one for RAG/agents.</li></ul><p>Defenses (layered, no single fix):</p><ul><li>Treat all retrieved/tool content as untrusted data, never as instructions.</li><li>Validate outputs before using them.</li><li>Keep tool permissions least-privilege so a hijacked model can't do damage.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior emphasizes indirect injection, assumes some attempts will succeed, and limits the blast radius — plus adds injection cases to the eval set as a permanent gate.</p></div><h5>Likely follow-ups</h5><ul><li>How would you exfiltrate data from a naive RAG agent?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'Just tell the model in the system prompt to ignore injection attempts.'</div><h5>Source / evidence</h5><p><a href="https://simonwillison.net/series/prompt-injection/" target="_blank" rel="noopener">Simon Willison — Prompt injection series</a></p></div></details><details class="qcard" id="how-do-you-stop-a-rag-system-from-leaking-data-a-user-should-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you stop a RAG system from leaking data a user shouldn't see?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Enforce access control at the retrieval step, not in the prompt:</p><ul><li>Tag each chunk with permission metadata (which group/role can see it).</li><li>Filter the search by the requesting user's permissions, so restricted documents are never even candidates.</li><li>For hard boundaries, use separate indexes per tenant.</li><li>Add an output PII/secret check as a backstop.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior carries the source system's permissions into the chunk metadata at ingestion and tests 'restricted query returns nothing' as a hard invariant. The model is the last thing they'd trust to enforce permissions.</p></div><h5>Likely follow-ups</h5><ul><li>Per-document permissions vs separate indexes — when each?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Relying on a prompt instruction to keep restricted data hidden.</div></div></details><details class="qcard" id="how-do-you-secure-an-agent-that-can-take-actions-send-email--2"><summary><span class="q-text"><span class="qx">Q</span><span>How do you secure an agent that can take actions (send email, run SQL)?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li>Give each tool the minimum capability it needs (e.g. read-only SQL with row limits).</li><li>Validate every tool argument.</li><li>Require confirmation or human approval for destructive/irreversible actions.</li><li>Control what the agent can reach (egress) and log every action for audit.</li><li>Treat tool outputs as untrusted (injection risk).</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior makes safety come from what the tools <em>can't</em> do, not from the model behaving — because the model can be manipulated.</p></div><h5>Likely follow-ups</h5><ul><li>How do you make a SQL tool safe?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Giving the agent broad write/delete access and trusting it to behave.</div></div></details><details class="qcard" id="direct-vs-indirect-injection-which-is-worse-for-agents-3"><summary><span class="q-text"><span class="qx">Q</span><span>Direct vs indirect injection — which is worse for agents?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Indirect is worse. A poisoned document or web page can contain hidden instructions that the agent reads and then acts on — sending data or taking actions — without the user being malicious at all.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior designs so that even if the model is hijacked, the tools and permissions prevent real damage, and tests for it explicitly.</p></div><h5>Likely follow-ups</h5><ul><li>How would you test for indirect injection?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Only knowing about 'ignore previous instructions'.</div></div></details>
+<div class="page-nav"><a href="../qbank/llmops.html"><div class="dir">← Previous</div><div class="ttl">LLMOps & Observability</div></a><a class="next" href="../qbank/system-design.html"><div class="dir">Next →</div><div class="ttl">GenAI System Design</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

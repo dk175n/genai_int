@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resume, GitHub &amp; Portfolio Guide — GenAI Interview Hub</title>
+<meta name="description" content="Your resume and GitHub are the first interview you pass. This is how a 5–10 yr engineer repositions an existing backend/ML resume for GenAI roles — with me">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Mocks & Revision / <b>07 · Resume, GitHub & Portfolio Guide</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Mocks & Revision</div>
+<h1>Resume, GitHub & Portfolio Guide</h1>
+<p class="lead">Your resume and GitHub are the first interview you pass. This is how a 5–10 yr engineer repositions an existing backend/ML resume for GenAI roles — with metric-driven bullets, a portfolio that proves production thinking, and a script for explaining projects.</p>
+<div class="callout key"><div class="c-ico">🎯</div><div class="c-body"><div class="c-title">The one principle</div><p>Hiring engineers skim for <strong>production thinking</strong> and <strong>impact</strong>, not tool lists. Every bullet should answer 'what did you build, what did it move, what was the hard call' — not 'I used LangChain'.</p></div></div>
+
+<h2 id="reposition">Reposition, don't rebuild</h2>
+<p>You already have strong material — reframe it for GenAI:</p>
+<div class="table-wrap"><table><thead><tr><th>You have</th><th>Reframe as</th></tr></thead><tbody><tr><td>Built FastAPI / backend services</td><td>Production LLM service experience: latency, cost, reliability</td></tr><tr><td>Data pipelines / ETL</td><td>Document ingestion & RAG indexing pipelines</td></tr><tr><td>ML model evaluation</td><td>LLM evaluation: golden sets, faithfulness, LLM-as-judge</td></tr><tr><td>Monitoring / observability</td><td>LLMOps: tracing, drift, cost/latency dashboards</td></tr><tr><td>ElasticSearch / search</td><td>Hybrid retrieval (dense + BM25), reranking</td></tr></tbody></table></div>
+
+<h2 id="flagship">Your strongest non-GenAI project — lead with it</h2>
+<div class="callout key"><div class="c-ico">🎯</div><div class="c-body"><div class="c-title">Indorama Digitization Project</div><p>If your background includes production AI/ML work like the <a href='../projects/indorama-digitization.html'>Indorama Digitization Project</a>, that is your <strong>strongest</strong> credential — put it first, before any academic or demo GenAI project.</p></div></div>
+<ul>
+<li><strong>It proves production AI engineering</strong> — you can build and deploy real AI systems, not just notebooks.</li>
+<li><strong>Connect it to GenAI</strong> explicitly: backend ML APIs → LLM/RAG/agent APIs; equipment dashboard → GenAI observability; Elasticsearch data fetch → retrieval; Kubernetes → production GenAI deployment.</li>
+<li><strong>Position it before smaller GenAI demos</strong> — it shows enterprise-scale engineering maturity that demos can't.</li>
+<li><strong>Stay honest</strong> — present it as production AI/ML backend experience that supports a GenAI transition, not as a GenAI project.</li>
+</ul>
+<p style="margin:8px 0"><a href="../projects/my-real-project-stories.html">Practice real project stories → My Real Project Stories</a> — compact 90-second stories and GenAI bridges for Indorama, Yield Optimizer, Real-Time Optimization, Digital Twin, PayPal Analytics, and NVIDIA Edge.</p>
+<p>Resume bullet to anchor it (full bullets + 90-second pitch + architecture on the <a href='../projects/indorama-digitization.html'>project page</a>):</p>
+<div class="callout tip"><div class="c-ico">✅</div><div class="c-body"><div class="c-title">Anchor bullet</div><p>'Built Python/FastAPI backend ML &amp; analytics APIs (hundreds of loop/equipment endpoints) generating anomaly, health, trip and KPI scores from Elasticsearch time-series data, integrated with the TCG Mcube monitoring dashboard and deployed on Kubernetes.'</p></div></div>
+
+<h2 id="bullets">Resume bullets that land</h2>
+<p>Formula: <strong>Built/Led [what] → [how, briefly] → moved [metric]</strong>. Lead with the number.</p>
+<div class="callout tip"><div class="c-ico">✅</div><div class="c-body"><div class="c-title">Weak → strong</div><p><strong>Weak:</strong> 'Worked on a chatbot using LangChain and OpenAI.'</p><p><strong>Strong:</strong> 'Built a production RAG assistant over 50k internal docs (hybrid retrieval + reranking, citations, abstain path); raised answer faithfulness from 0.72→0.91 on a 120-case golden set and cut p95 latency 40% via caching + model routing.'</p></div></div>
+<ul>
+<li>Quantify: faithfulness, recall@k, latency, cost/request, deflection rate, adoption.</li>
+<li>Name the hard call: 'chose RAG over fine-tuning because…', 'hybrid over semantic-only because…'.</li>
+<li>Show production discipline: evaluation, guardrails, monitoring — not just 'it works'.</li>
+<li>One line per project; link the GitHub repo.</li>
+</ul>
+
+<h2 id="summary">The 3-line summary</h2>
+<div class="callout note"><div class="c-ico">📝</div><div class="c-body"><div class="c-title">Template</div><p>'Senior engineer (X yrs) specializing in production GenAI — RAG, agents, and LLM evaluation on top of Python/FastAPI services. Shipped [flagship project] that [metric]. Strong on retrieval quality, evaluation, and cost/latency optimization.'</p></div></div>
+
+<h2 id="github">GitHub &amp; README</h2>
+<p>Your repo is read more carefully than your resume. Each portfolio project's README should have:</p>
+<ul>
+<li><strong>Problem &amp; who it's for</strong> — one paragraph.</li>
+<li><strong>Architecture diagram</strong> — the pipeline at a glance.</li>
+<li><strong>Quickstart</strong> — one command (<code>docker compose up</code>).</li>
+<li><strong>Design decisions</strong> — chunking, hybrid, rerank, with <em>rationale</em> (this is what engineers read).</li>
+<li><strong>Evaluation</strong> — your golden-set numbers (the standout signal).</li>
+<li><strong>Limitations &amp; next steps</strong> — shows judgment.</li>
+</ul>
+<div class="callout warn"><div class="c-ico">⚠️</div><div class="c-body"><div class="c-title">Pin 2–3 deep repos, not 10 shallow ones</div><p>Two polished projects with eval numbers beat ten half-finished demos. Pin <a href='../projects/build-first-rag.html'>the RAG app</a>, <a href='../projects/build-first-agent.html'>an agent</a>, and <a href='../projects/monitoring-dashboard.html'>the monitoring dashboard</a>.</p></div></div>
+
+<h2 id="explain">Explaining a project (the 2-minute template)</h2>
+<ol>
+<li><strong>Problem &amp; users</strong> (15s) — what and for whom.</li>
+<li><strong>Architecture</strong> (30s) — the pipeline in one breath.</li>
+<li><strong>Hardest decision</strong> (30s) — the tradeoff you made and why.</li>
+<li><strong>How you knew it worked</strong> (30s) — the metric.</li>
+<li><strong>What you'd do next</strong> (15s) — shows you see its limits.</li>
+</ol>
+<p>Then stop and let the interviewer pull threads. Every project page has a "Questions the interviewer may ask" section — rehearse those.</p>
+<div class="callout tip"><div class="c-ico">✅</div><div class="c-body"><div class="c-title">Turn this project into interview answers →</div><p>After writing the Indorama Digitization Project on your resume or portfolio, practice explaining it using the dedicated project interview page. It covers production ML APIs, time-series data handling, health scoring, Kubernetes deployment, Mcube integration, and how to connect the project to GenAI roles.</p><p style='margin:8px 0 0'><a class='btn sm' href='../projects/indorama-interview-questions.html'>Practice Indorama Project Interview Questions →</a></p><p style='margin:10px 0 0;font-size:13px;color:var(--text-muted)'>Use this before project deep-dive, senior behavioral, and resume-screening rounds where the interviewer asks you to explain your strongest real-world AI/ML project.</p></div></div>
+
+<h2 id="linkedin">LinkedIn &amp; recruiter screens</h2>
+<ul>
+<li>Headline: target role + specialty ('GenAI / Applied AI Engineer — RAG, Agents, LLMOps').</li>
+<li>For <strong>India</strong> roles, list concrete stack (Python, FastAPI, vector DBs, LangGraph) — keyword-matched to JDs/ATS.</li>
+<li>For <strong>global remote</strong>, emphasize async communication, ownership, and a public portfolio.</li>
+<li>Recruiter screen: have a 60-second pitch (see <a href='start-here.html'>Start Here</a>) and one metric-backed project story ready.</li>
+</ul>
+
+<h2 id="mistakes">Common mistakes</h2>
+<ul>
+<li>Listing tools instead of impact and tradeoffs.</li>
+<li>No metrics anywhere.</li>
+<li>A README that's just install steps — no design rationale or evaluation.</li>
+<li>Ten shallow repos; none deployed or evaluated.</li>
+<li>Claiming 'fine-tuned LLMs' when you did prompting + RAG (interviewers will probe).</li>
+</ul>
+
+<h2 id="checklist">Pre-send checklist</h2>
+<ul class="checklist">
+<li>Every project bullet has a metric</li>
+<li>3-line summary targets one role</li>
+<li>2–3 pinned repos with eval numbers in the README</li>
+<li>Each repo runs with one command</li>
+<li>I can explain each project in 2 minutes using the template</li>
+<li>No tool-listing without impact</li>
+</ul>
+<div class="page-nav"><a href="../mocks/behavioral-mock.html"><div class="dir">← Previous</div><div class="ttl">Senior Behavioral Mock Round</div></a><a class="next" href="../mocks/final-revision.html"><div class="dir">Next →</div><div class="ttl">Final Revision Sheets</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#reposition">Reposition, don't rebuild</a><a href="#flagship">Your strongest non-GenAI project</a><a href="#bullets">Resume bullets that land</a><a href="#summary">The 3-line summary</a><a href="#github">GitHub & README</a><a href="#explain">Explaining a project (the template)</a><a href="#linkedin">LinkedIn & recruiter screens</a><a href="#mistakes">Common mistakes</a><a href="#checklist">Pre-send checklist</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

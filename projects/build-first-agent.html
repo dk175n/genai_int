@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project · Build Your First Agent App — GenAI Interview Hub</title>
+<meta name="description" content="A reliable tool-using agent — bounded loop, schema-validated tools, output guardrails — that proves you can build agents that don't loop forever or call th">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Hands-on Projects / <b>02 · Build First Agent App</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Hands-on Projects</div>
+<h1>Project · Build Your First Agent App</h1>
+<p class="lead">A reliable tool-using agent — bounded loop, schema-validated tools, output guardrails — that proves you can build agents that don't loop forever or call the wrong tool. The concepts from <a href='../pages/agentic-ai.html'>Agentic AI</a>, shipped.</p>
+<div class="meta-row"><span class="pill purple">Agent foundation</span></div>
+<h2 id="proves">What this project proves in an interview</h2><p>You understand the agent loop as engineering: 'model proposes, runtime disposes', bounded steps, validated tool calls, and guardrails — not a magic autonomous black box.</p>
+<h2 id="architecture">Architecture</h2><div class="ragflow lr"><div class="rf"><div>Goal</div></div><div class="arr"></div><div class="rf accent"><div>LLM decides tool</div></div><div class="arr"></div><div class="rf"><div>Validate input + guard</div></div><div class="arr"></div><div class="rf"><div>Execute tool</div></div><div class="arr"></div><div class="rf"><div>Observe → loop (bounded)</div></div><div class="arr"></div><div class="rf"><div>Guard output</div></div></div>
+<h2 id="stack">Tech stack options</h2><div class="table-wrap"><table><thead><tr><th>Layer</th><th>Default</th><th>Alternatives</th></tr></thead><tbody><tr><td>Orchestration</td><td>Plain Python loop or LangGraph</td><td>LangChain agents, custom</td></tr><tr><td>Tools</td><td>2–3 typed Python functions</td><td>MCP servers</td></tr><tr><td>LLM</td><td>tool-calling model (Claude/GPT)</td><td>Hermes/local via Ollama</td></tr><tr><td>API</td><td>FastAPI</td><td>—</td></tr></tbody></table></div>
+<h2 id="api">API design</h2><strong>POST /agent</strong> → {goal} ⇒ {answer, steps:[{tool, input, output}], stopped_reason}. Returning the step trace makes the agent debuggable and demoable.
+<h2 id="dataflow">Data flow</h2><p>Goal → model emits a tool call → validate args against schema → execute (with timeout) → append observation → repeat until final answer or MAX_STEPS → guard output → return with the step trace.</p>
+<h2 id="eval">Evaluation plan</h2><p>Build task cases with expected tool sequences / final answers. Measure task success rate, average steps, and tool-error rate. Add adversarial cases (injection via tool output, ambiguous goals) as a permanent gate.</p>
+<h2 id="failures">Failure modes</h2><ul><li>Infinite loop → MAX_STEPS budget</li><li>Wrong/invalid tool args → schema validation + repair</li><li>Trusting tool output → treat as untrusted (injection)</li><li>Over-privileged tool → least privilege</li><li>Cost blowup → per-run token budget</li></ul>
+<h2 id="demo">Demo script</h2><p>1) A goal needing 2 tool calls → show the step trace. 2) A goal that should fail gracefully (no tool fits) → it stops cleanly. 3) An injection attempt in a tool result → guard catches it.</p>
+<h2 id="readme">GitHub README structure</h2><p>Problem · Architecture (the loop) · Tools (with schemas) · Reliability (bounded loop, validation, guardrails) · Evaluation (task success rate) · A note on where you'd use a workflow instead. That last note signals maturity.</p>
+<h2 id="explain">Interview explanation template</h2><p>“I built a tool-using agent with a bounded loop and validated tool calls. The point was reliability: I show task success rate, and I can explain exactly how it avoids the classic agent failures — looping, bad tool args, and injection via tool output.”</p>
+<h2 id="questions">Questions the interviewer may ask about this project (2)</h2><details class="qcard" id="how-would-you-explain-the-first-agent-app-project-in-an-inte-0"><summary><span class="q-text"><span class="qx">Q</span><span>How would you explain the First Agent App project in an interview?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">behavioral</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Lead with the problem and the metric: “It's a tool-using agent that completes multi-step goals reliably, with a bounded loop and guardrails, measured by task success rate.” Then the architecture in one breath, then the one hard tradeoff you made and how you evaluated it.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I structure it as: problem → users → architecture → the hardest decision and why → how I measured success → what I'd do next. I keep it to 2 minutes and let the interviewer pull threads.</p></div><h5>Likely follow-ups</h5><ul><li>What was the hardest part?</li><li>What would you change with more time?</li><li>How did you know it worked?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Listing technologies with no problem, metric, or tradeoff.</div></div></details><details class="qcard" id="how-does-your-agent-avoid-looping-forever-or-calling-the-wro-1"><summary><span class="q-text"><span class="qx">Q</span><span>How does your agent avoid looping forever or calling the wrong tool?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>A max-steps budget bounds the loop, every tool call is validated against a schema (with a repair retry), and tools are least-privilege and idempotent. Output is guarded before return.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I add per-run token/cost budgets and a step trace for observability, and I treat tool outputs as untrusted input. Reliability is engineering around the loop; the prompt is the least important part.</p></div><h5>Likely follow-ups</h5><ul><li>Where would you add human-in-the-loop?</li><li>How do you test it?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">No bound on the loop; trusting the model to stop.</div></div></details>
+<h2 id="checklist">Build & ship checklist</h2><ul class="checklist"><li>Bounded loop + token budget</li><li>Schema-validated tools + repair</li><li>Output guardrail + injection test</li><li>Step trace returned</li><li>Task-success eval</li></ul>
+<div class="page-nav"><a href="../projects/build-first-rag.html"><div class="dir">← Previous</div><div class="ttl">Build First RAG App</div></a><a class="next" href="../projects/pdf-qna.html"><div class="dir">Next →</div><div class="ttl">PDF Q&A App</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#proves">What this project proves in an interview</a><a href="#architecture">Architecture</a><a href="#stack">Tech stack options</a><a href="#api">API design</a><a href="#dataflow">Data flow</a><a href="#eval">Evaluation plan</a><a href="#failures">Failure modes</a><a href="#demo">Demo script</a><a href="#readme">GitHub README structure</a><a href="#explain">Interview explanation template</a><a href="#questions">Questions the interviewer may ask about this project (2)</a><a href="#checklist">Build & ship checklist</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

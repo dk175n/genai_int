@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · Embeddings &amp; Vector DB — GenAI Interview Hub</title>
+<meta name="description" content="Retrieval substrate questions — high frequency in applied loops.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>03 · Embeddings & Vector DB</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · Embeddings & Vector DB</h1>
+<p class="lead">Retrieval substrate questions — high frequency in applied loops.</p>
+<div class="meta-row"><span class="pill purple">Embeddings & Vector DB</span><span class="pill ">5 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (5)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="what-is-an-embedding-and-why-does-cosine-similarity-work-0"><summary><span class="q-text"><span class="qx">Q</span><span>What is an embedding and why does cosine similarity work?</span></span><span class="q-tags"><span class="qtag beginner">Beginner</span><span class="qtag ">screening</span><span class="qtag ">Mid</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>An embedding turns a piece of text into a vector (a list of numbers) so that texts with similar meaning end up close together in that space.</p><p>Cosine similarity measures the angle between two vectors — a small angle means similar meaning. So to find relevant text, you find the vectors closest to the query's vector.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior notes you normally normalize the vectors, that the embedding model must fit your domain, and that embeddings capture meaning but miss exact tokens (IDs, names) — which is why keyword search is still needed alongside them.</p></div><h5>Likely follow-ups</h5><ul><li>When do embeddings fail to find the right text?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Can't explain what 'similar' means or how search uses it.</div><h5>Related hands-on task / project</h5><p><a href='../pages/embeddings-vector-search.html'>Embeddings & Vector Search</a>.</p></div></details><details class="qcard" id="dense-vs-sparse-vs-hybrid-retrieval-what-s-the-difference-1"><summary><span class="q-text"><span class="qx">Q</span><span>Dense vs sparse vs hybrid retrieval — what's the difference?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>Dense</strong> (embeddings) — great at meaning and paraphrase ('reset password' ≈ 'change my login').</li><li><strong>Sparse</strong> (BM25 / keyword) — great at exact terms: IDs, names, codes, rare words.</li><li><strong>Hybrid</strong> — run both, combine the results, then rerank. This is the production default because real questions need both.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior weights the two by domain (more keyword weight for legal/finance/part-numbers, more semantic for conversational FAQ) and validates the choice on a labeled set rather than guessing.</p></div><h5>Likely follow-ups</h5><ul><li>How do you combine the two result lists?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Insisting embeddings alone are always enough.</div></div></details><details class="qcard" id="what-is-an-ann-index-hnsw-and-what-do-you-trade-for-speed-2"><summary><span class="q-text"><span class="qx">Q</span><span>What is an ANN index (HNSW) and what do you trade for speed?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Searching millions of vectors exactly is too slow. An Approximate Nearest Neighbor (ANN) index like HNSW finds 'close enough' matches fast.</p><p>The trade-off: you give up a little accuracy (recall) for a big speed gain. A setting like <code>ef_search</code> lets you tune that balance — higher = more accurate but slower.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior picks the setting from a latency budget: raise accuracy until it stops improving within the latency you can afford, and also accounts for memory and re-index cost as the data grows.</p></div><h5>Likely follow-ups</h5><ul><li>How does HNSW differ from IVF?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Believing ANN search is exact/lossless.</div><h5>Source / evidence</h5><p><a href="https://arxiv.org/abs/1603.09320" target="_blank" rel="noopener">Malkov & Yashunin — HNSW (arXiv)</a></p></div></details><details class="qcard" id="how-do-you-choose-a-vector-database-3"><summary><span class="q-text"><span class="qx">Q</span><span>How do you choose a vector database?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Pick based on scale, filtering needs, and how much infra you want to run:</p><ul><li><strong>pgvector</strong> — you already run Postgres and scale is moderate.</li><li><strong>Qdrant / Weaviate / Milvus</strong> — large scale, heavy metadata filtering.</li><li><strong>FAISS</strong> — in-process, offline, or research.</li><li><strong>Managed (Pinecone etc.)</strong> — you don't want to operate infra.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior starts from constraints (data residency, multi-tenancy, can the team run another stateful service?) and avoids adopting a heavy vector DB before the scale actually requires it — pgvector covers a lot.</p></div><h5>Likely follow-ups</h5><ul><li>Why not always use a managed service?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Picking the trendiest DB with no reference to scale or operations.</div></div></details><details class="qcard" id="what-does-reranking-add-and-why-a-cross-encoder-4"><summary><span class="q-text"><span class="qx">Q</span><span>What does reranking add, and why a cross-encoder?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>First-pass search returns many roughly-relevant chunks. A reranker reorders the top candidates by true relevance and keeps only the best few.</p><p>A cross-encoder reads the query and a chunk <em>together</em> (not separately), so it judges relevance much more precisely — at the cost of speed, which is why you only run it on the top ~50, not the whole corpus.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior uses reranking to keep the context small and precise (cheaper, less 'lost in the middle') and measures the recall@k improvement to justify it.</p></div><h5>Likely follow-ups</h5><ul><li>Why not use a cross-encoder for the whole search?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Stuffing many un-reranked chunks straight into the prompt.</div></div></details>
+<div class="page-nav"><a href="../qbank/prompt-engineering.html"><div class="dir">← Previous</div><div class="ttl">Prompt Engineering</div></a><a class="next" href="../qbank/rag.html"><div class="dir">Next →</div><div class="ttl">RAG</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (5)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

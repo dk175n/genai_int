@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · Agentic AI — GenAI Interview Hub</title>
+<meta name="description" content="Fast-rising category. See also Agentic AI.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>05 · Agentic AI</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · Agentic AI</h1>
+<p class="lead">Fast-rising category. See also <a href='../pages/agentic-ai.html#questions'>Agentic AI</a>.</p>
+<div class="meta-row"><span class="pill purple">Agentic AI</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="how-does-an-agent-tool-calling-actually-work-0"><summary><span class="q-text"><span class="qx">Q</span><span>How does an agent / tool calling actually work?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>An agent is an LLM in a loop with tools. The cycle:</p><ul><li>You give the model a set of tools (functions) with their input schemas.</li><li>It outputs a structured request to call one tool with some arguments.</li><li><strong>Your code</strong> runs the real function and returns the result.</li><li>The result goes back into the conversation; the model decides the next step or gives a final answer.</li><li>Repeat until done — with a maximum step limit.</li></ul><p>Key point: the model only <em>proposes</em> a call; your runtime actually executes it.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior frames it as 'model proposes, runtime disposes': the runtime is the trust boundary, so it validates the arguments, keeps tools least-privilege, and bounds the loop. That framing is what makes agents safe.</p></div><h5>Likely follow-ups</h5><ul><li>What stops it from looping forever?</li><li>What if a tool fails?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Thinking the LLM itself runs the code/tool.</div><h5>Related hands-on task / project</h5><p><a href='../projects/build-first-agent.html'>Build First Agent App</a>.</p><h5>Source / evidence</h5><p><a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" target="_blank" rel="noopener">Anthropic — Tool use docs</a></p></div></details><details class="qcard" id="react-vs-planner-executor-vs-stateful-graph-1"><summary><span class="q-text"><span class="qx">Q</span><span>ReAct vs planner-executor vs stateful graph?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>ReAct</strong> — reason and act one step at a time, adapting as it goes. Flexible but can wander and is hard to predict.</li><li><strong>Planner-executor</strong> — make a full plan first, then execute the steps. Predictable and easier to debug.</li><li><strong>Stateful graph (LangGraph)</strong> — model the agent as nodes/edges with explicit state, checkpoints and human-in-the-loop. The production-grade option.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior leans toward planner-executor or an explicit graph in production because predictability, cost control and observability matter more than raw flexibility.</p></div><h5>Likely follow-ups</h5><ul><li>How do you bound cost in ReAct?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Treating ReAct as always the best choice.</div></div></details><details class="qcard" id="why-do-agents-fail-in-production-and-how-do-you-make-them-re-2"><summary><span class="q-text"><span class="qx">Q</span><span>Why do agents fail in production, and how do you make them reliable?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Common failures:</p><ul><li>Looping forever, or calling the wrong tool / wrong arguments.</li><li>One bad early step cascading into a wrong result.</li><li>Cost blowups from too many calls.</li><li>Prompt injection hidden in tool outputs.</li></ul><p>Fixes:</p><ul><li>Bound the loop (max steps) and set a token/cost budget.</li><li>Validate every tool call against its schema.</li><li>Make tools least-privilege and idempotent; add timeouts/retries.</li><li>Guard inputs and outputs; treat tool results as untrusted.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior adds explicit state with checkpointing (retry a step, not the whole run), human-in-the-loop on risky actions, and full tracing so the decision path is debuggable.</p></div><h5>Likely follow-ups</h5><ul><li>Where do you put human-in-the-loop?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">No mention of bounding the loop or budgets.</div></div></details><details class="qcard" id="when-would-you-not-build-an-agent-3"><summary><span class="q-text"><span class="qx">Q</span><span>When would you NOT build an agent?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>When the steps are known in advance. Then a plain deterministic workflow (with maybe one LLM call per step) is cheaper, faster, more testable, and more reliable than a free-running agent loop.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior defaults to the least-agentic solution that works and only escalates to a full agent when the path is genuinely dynamic at runtime. That restraint signals maturity.</p></div><h5>Likely follow-ups</h5><ul><li>Give an example you'd build as a workflow, not an agent.</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Reaching for an agent for everything because it's impressive.</div></div></details>
+<div class="page-nav"><a href="../qbank/rag.html"><div class="dir">← Previous</div><div class="ttl">RAG</div></a><a class="next" href="../qbank/frameworks.html"><div class="dir">Next →</div><div class="ttl">LangChain / LangGraph / LlamaIndex</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

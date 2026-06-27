@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design · Code Assistant Agent — GenAI Interview Hub</title>
+<meta name="description" content="An agent that answers questions and makes changes across a codebase: repo-aware retrieval, tools (read/search/edit/run tests) in a sandbox, with guardrails">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">System Design / <b>04 · Code Assistant Agent</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> System Design</div>
+<h1>Design · Code Assistant Agent</h1>
+<p class="lead">An agent that answers questions and makes changes across a codebase: repo-aware retrieval, tools (read/search/edit/run tests) in a sandbox, with guardrails on execution.</p>
+<div class="meta-row"><span class="pill purple">Agent + RAG</span></div>
+<h2 id="intro">The brief</h2><p>RAG over code + an action-taking agent. Retrieval must be code-aware (symbols, files), and execution (running tests, editing) must be sandboxed and bounded.</p>
+<h2 id="clarify">Clarifying questions to ask first</h2><ul><li>Read-only Q&A or does it edit code?</li><li>Can it run code/tests? In what sandbox?</li><li>Repo size and languages?</li><li>How are changes reviewed (PR + human)?</li></ul>
+<h2 id="functional">Functional requirements</h2><ul><li>Answer questions about the repo with file/line citations</li><li>Propose edits as diffs</li><li>Run tests in a sandbox</li><li>Open a PR for human review</li></ul>
+<h2 id="nonfunctional">Non-functional requirements</h2><ul><li>No unsandboxed execution</li><li>Bounded cost/steps per task</li><li>Latency tolerable for dev workflow</li><li>No secret leakage from repo</li></ul>
+<h2 id="architecture">Architecture</h2><div class="ragflow lr"><div class="rf"><div>Task</div></div><div class="arr"></div><div class="rf accent"><div>Code-aware retrieve<small>symbols·files</small></div></div><div class="arr"></div><div class="rf"><div>Plan + edit (diff)</div></div><div class="arr"></div><div class="rf"><div>Run tests (sandbox)</div></div><div class="arr"></div><div class="rf"><div>PR for review</div></div></div>
+<h2 id="ingestion">Data ingestion layer</h2><p>Index repo by file + symbol; chunk along function/class boundaries; keep path metadata; re-index on commit.</p>
+<h2 id="retrieval">Retrieval layer</h2><p>Hybrid + symbol search; expand to surrounding file context (parent-doc style).</p>
+<h2 id="orchestration">Model / orchestration layer</h2><p>Planner-executor or graph: locate → plan edit → apply diff → run tests → iterate (bounded). Tools: search, read, edit, run_tests.</p>
+<h2 id="safety">Safety layer</h2><p>Execution only in an ephemeral sandbox; no network/secrets; bounded steps & cost; all changes via PR (human merges); treat repo content as untrusted (injection in comments).</p>
+<h2 id="evaluation">Evaluation layer</h2><p>Task success = tests pass / correct diff on a benchmark of tasks; track steps and cost; regression on a fixed task set.</p>
+<h2 id="observability">Observability layer</h2><p>Trace plan + tool calls + diffs; monitor task success rate, sandbox failures, cost/task.</p>
+<h2 id="costlatency">Cost & latency tradeoffs</h2><div class="table-wrap"><table><thead><tr><th>Lever</th><th>Effect</th><th>Tradeoff</th></tr></thead><tbody><tr><td>Scope retrieval to relevant files</td><td>↓ cost/latency</td><td>Risk missing context</td></tr><tr><td>Cap iterations</td><td>↓ cost</td><td>May not finish hard tasks</td></tr></tbody></table></div>
+<h2 id="failures">Failure modes</h2><ul><li>Unsafe execution → sandbox + no secrets</li><li>Endless edit-test loops → step budget</li><li>Bad edits merged → PR + human review</li><li>Injection via code comments → untrusted content</li></ul>
+<h2 id="tenmin">How to explain this design in 10 minutes</h2><p>Clarify edit-vs-readonly and execution; draw code-aware retrieval + planner-executor + sandbox + PR gate; stress sandboxing and bounded loops; cover task-success eval; close with failure modes.</p>
+<h2 id="interruptions">Common interviewer interruptions & how to answer</h2><div class="table-wrap"><table><thead><tr><th>Interviewer says…</th><th>How to answer</th></tr></thead><tbody><tr><td>“What if retrieval returns nothing relevant?”</td><td>Coverage gate → abstain or escalate; never force an answer. Measure abstain-correctness.</td></tr><tr><td>“This will be too expensive.”</td><td>Cache + route to a smaller model for easy traffic; show cost/req and that quality held on eval.</td></tr><tr><td>“How do you know it's any good?”</td><td>Golden set offline as a deploy gate + sampled online judging; split retrieval vs generation metrics.</td></tr><tr><td>“What about data the user shouldn't see?”</td><td>Access control enforced at retrieval, not the prompt; per-tenant filters or separate indexes.</td></tr><tr><td>“What happens when the model provider goes down?”</td><td>Timeouts, fallback model/provider, graceful degradation to cached/smaller answers.</td></tr></tbody></table></div>
+<h2 id="questions">Interview questions on this design (3)</h2><details class="qcard" id="how-do-you-safely-let-an-agent-run-and-modify-code-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you safely let an agent run and modify code?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Run only in an ephemeral, network/secret-free sandbox; bound steps and cost; surface changes as diffs and require a human-reviewed PR to merge; treat repo content as untrusted.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>Safety comes from the environment, not the model: the sandbox can't reach secrets or prod, the agent can't merge, and every action is traced. I'd benchmark task success on a fixed set so improvements are measured.</p></div><h5>Likely follow-ups</h5><ul><li>How do you bound cost on hard tasks?</li><li>How is repo content an injection vector?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Letting the agent execute with prod credentials or auto-merge.</div></div></details><details class="qcard" id="how-do-you-do-code-aware-retrieval-over-a-large-repo-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you do code-aware retrieval over a large repo?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-emerging">freq: emerging</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Index by file and symbol (functions/classes), chunk along code boundaries rather than fixed sizes, keep path metadata, and re-index on commit. Combine semantic search with symbol/keyword lookup, then expand to surrounding file context.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior scopes retrieval to the relevant files/modules to keep context small and cheap, and notes that code has strong structure (imports, call graphs) you can exploit beyond plain text chunking.</p></div><h5>Likely follow-ups</h5><ul><li>How do you keep the index fresh on every commit?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Treating code as plain prose and fixed-size chunking it.</div></div></details><details class="qcard" id="how-would-you-evaluate-a-code-assistant-agent-2"><summary><span class="q-text"><span class="qx">Q</span><span>How would you evaluate a code assistant agent?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Benchmark of tasks with objective checks: do the generated tests pass / does the diff produce correct behavior? Track task success rate, steps and cost per task, and sandbox failure rate.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior uses tests-pass as the ground-truth signal (objective, unlike prose), and runs the benchmark as CI so model/prompt changes don't regress task success.</p></div><h5>Likely follow-ups</h5><ul><li>What's your ground-truth signal?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Judging by whether the code 'looks reasonable'.</div></div></details>
+<div class="page-nav"><a href="../systemdesign/document-qa-regulated.html"><div class="dir">← Previous</div><div class="ttl">Document Q&A for Legal / Finance / HR</div></a><a class="next" href="../systemdesign/sql-data-agent.html"><div class="dir">Next →</div><div class="ttl">SQL Data Agent</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#intro">The brief</a><a href="#clarify">Clarifying questions to ask first</a><a href="#functional">Functional requirements</a><a href="#nonfunctional">Non-functional requirements</a><a href="#architecture">Architecture</a><a href="#ingestion">Data ingestion layer</a><a href="#retrieval">Retrieval layer</a><a href="#orchestration">Model / orchestration layer</a><a href="#safety">Safety layer</a><a href="#evaluation">Evaluation layer</a><a href="#observability">Observability layer</a><a href="#costlatency">Cost & latency tradeoffs</a><a href="#failures">Failure modes</a><a href="#tenmin">How to explain this design in 10 minutes</a><a href="#interruptions">Common interviewer interruptions & how to answer</a><a href="#questions">Interview questions on this design (3)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

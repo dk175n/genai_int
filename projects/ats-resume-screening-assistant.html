@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATS Resume Screening Assistant — GenAI Interview Hub</title>
+<meta name="description" content="RAG-based HR candidate shortlisting project for resume screening, skill extraction, candidate ranking, and explainable match scoring.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">My Projects & Experience / <b>★A · ATS Resume Screening Assistant</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Hands-on Projects · GenAI portfolio project</div>
+<h1>ATS Resume Screening Assistant</h1>
+<p class="lead">RAG-based HR candidate shortlisting project for resume screening, skill extraction, candidate ranking, and explainable match scoring.</p>
+<div class="meta-row"><span class="pill red">High interview value</span><span class="pill purple">GenAI HR Project</span><span class="pill blue">Python · FastAPI · RAG</span><span class="pill amber">Embeddings · Vector DB</span></div>
+<div class="callout warn"><div class="c-ico">⚠️</div><div class="c-body"><div class="c-title">Honest positioning for interviews</div><p>Position this as a practical GenAI ATS project designed for HR resume screening and candidate shortlisting workflows. Do not claim it is a production HR system unless it is actually deployed or officially adopted. Present it as an interview-ready business GenAI project that demonstrates RAG, embeddings, structured extraction, evaluation, responsible AI, FastAPI backend design, and human-in-the-loop review.</div></div>
+
+<h2 id="summary">Project summary</h2>
+<p>Built a GenAI-powered ATS assistant that compares resumes against job descriptions, extracts candidate skills and experience, ranks candidates using semantic matching, explains the match score, and helps HR teams shortlist candidates with human review.</p>
+<div class="table-wrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Domain</strong></td><td>HR Tech / Recruitment Automation / GenAI Resume Screening</td></tr><tr><td><strong>Role positioning</strong></td><td>GenAI Engineer / Python Backend Engineer / RAG Application Developer</td></tr><tr><td><strong>Core stack</strong></td><td>Python, FastAPI, LLM APIs, Embeddings, Vector DB, RAG, PDF/resume parsing, JSON extraction, PostgreSQL or SQLite, Streamlit or React, Docker</td></tr><tr><td><strong>Optional tools</strong></td><td>LangChain or LlamaIndex · Chroma / Qdrant / FAISS · OpenAI / Gemini / Claude APIs</td></tr></tbody></table></div>
+
+<h2 id="proves">What this project proves in interviews</h2>
+<ul>
+<li>Ability to build a real GenAI business application end to end.</li>
+<li>RAG pipeline design; resume and JD parsing.</li>
+<li>Embedding-based semantic matching; structured extraction with LLMs.</li>
+<li>Candidate ranking with explainability.</li>
+<li>FastAPI backend design.</li>
+<li>Responsible-AI awareness in HR workflows + human-in-the-loop review.</li>
+<li>Evaluation and debugging of LLM outputs.</li>
+</ul>
+
+<h2 id="features">Core features</h2>
+<ul>
+<li>Upload a job description and multiple resumes (PDF/DOCX).</li>
+<li>Extract skills, years of experience, education, projects, tools, certifications.</li>
+<li>Generate a candidate–job match score and rank candidates.</li>
+<li>Explain why a candidate is a good or weak fit; show missing skills.</li>
+<li>Generate a recruiter summary; export shortlisted candidates.</li>
+<li>Support human review before any final decision.</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<div class="ragflow lr"><div class="rf"><div>JD upload + resume uploads</div></div><div class="arr"></div><div class="rf"><div>Parse + extract skills (JD & resumes)</div></div><div class="arr"></div><div class="rf accent"><div>Embedding generation</div></div><div class="arr"></div><div class="rf"><div>Vector search / semantic match</div></div><div class="arr"></div><div class="rf"><div>LLM match explanation</div></div><div class="arr"></div><div class="rf"><div>Candidate scorecard</div></div><div class="arr"></div><div class="rf"><div>HR review dashboard</div></div></div>
+<div class="code-block mermaid-src"><div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span>mermaid</span><button class="copy-btn" type="button">Copy</button></div><pre><code>flowchart TD
+    A[Job Description Upload] --&gt; B[JD Parsing and Skill Extraction]
+    C[Resume Uploads] --&gt; D[Resume Parsing and Chunking]
+    B --&gt; E[Embedding Generation]
+    D --&gt; E
+    E --&gt; F[Vector Search / Semantic Matching]
+    F --&gt; G[LLM-based Match Explanation]
+    G --&gt; H[Candidate Scorecard]
+    H --&gt; I[HR Review Dashboard]</code></pre></div><div class="diagram-caption">JD + resumes → parse/extract → embed → semantic match → LLM explanation → scorecard → HR review.</div>
+
+<h2 id="stack">Tech stack</h2>
+<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Tech</th></tr></thead><tbody><tr><td>API / backend</td><td>Python, FastAPI</td></tr><tr><td>Parsing</td><td>PDF/DOCX resume parsing, JD parsing, JSON/structured extraction</td></tr><tr><td>Retrieval</td><td>Embeddings + Vector DB (Chroma / Qdrant / FAISS), RAG, hybrid matching</td></tr><tr><td>LLM</td><td>OpenAI / Gemini / Claude APIs (optionally via LangChain / LlamaIndex)</td></tr><tr><td>Storage</td><td>PostgreSQL or SQLite</td></tr><tr><td>UI</td><td>Streamlit or React dashboard</td></tr><tr><td>Deploy</td><td>Docker</td></tr></tbody></table></div>
+
+<h2 id="api">API design</h2>
+<div class="table-wrap"><table><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody><tr><td>POST /api/jobs</td><td>Create a job + parse the JD into structured requirements</td></tr><tr><td>POST /api/resumes/upload</td><td>Upload one or more resumes; parse + extract structured profiles</td></tr><tr><td>POST /api/screen</td><td>Run a screening: match resumes to a JD, score and rank</td></tr><tr><td>GET /api/jobs/{job_id}/candidates</td><td>List ranked candidates for a job</td></tr><tr><td>GET /api/candidates/{candidate_id}/scorecard</td><td>Match score, evidence, missing skills, explanation</td></tr><tr><td>POST /api/feedback</td><td>Capture recruiter feedback / override for a candidate</td></tr></tbody></table></div>
+
+<h2 id="datamodel">Data model</h2>
+<div class="table-wrap"><table><thead><tr><th>Entity</th><th>Holds</th></tr></thead><tbody><tr><td>JobDescription</td><td>Raw JD + extracted requirements/skills</td></tr><tr><td>Candidate</td><td>Candidate identity (PII minimized)</td></tr><tr><td>ResumeDocument</td><td>Uploaded file + parsed text</td></tr><tr><td>ExtractedProfile</td><td>Structured skills, experience, education, tools, certs</td></tr><tr><td>MatchScore</td><td>Per-requirement + overall score, evidence, missing skills</td></tr><tr><td>ScreeningRun</td><td>A screening execution linking a JD to candidates</td></tr><tr><td>RecruiterFeedback</td><td>Human review, override, decision audit trail</td></tr></tbody></table></div>
+
+<h2 id="eval">Evaluation plan</h2>
+<ul>
+<li>Create 20–50 sample JD–resume pairs; manually label strong / medium / weak.</li>
+<li>Compare the system's ranking with the human ranking.</li>
+<li>Track extraction accuracy, hallucinated skills, and missing-skill correctness.</li>
+<li>Track explanation quality, false positives and false negatives.</li>
+<li>Add a human feedback loop so labels grow over time.</li>
+</ul>
+
+<h2 id="responsible">Responsible AI & guardrails</h2>
+<div class="callout danger"><div class="c-ico">⛔</div><div class="c-body"><div class="c-title">HR is high-risk — design for it</div><ul style='margin:0'><li>Do <strong>not</strong> make final hiring decisions automatically — keep the recruiter in the loop.</li><li>Do not use or rank on protected attributes: gender, age, religion, caste, race, photo, address, marital status.</li><li>Mask or ignore PII where possible.</li><li>Explain every score; store an audit trail of screening decisions.</li><li>Allow recruiter override; clearly mark the tool as decision-support, not decision-maker.</li></ul></div></div>
+
+<h2 id="failures">Failure modes</h2>
+<ul>
+<li>Resume parsing errors; long resumes causing context issues; duplicate resumes.</li>
+<li>Missing or hallucinated skills; overweighting keyword matches; underweighting transferable skills.</li>
+<li>Bias from historical hiring data; poor JD quality.</li>
+<li>Candidate ranking instability; LLM output-format failures.</li>
+</ul>
+
+<h2 id="demo">3-minute demo script</h2>
+<ol>
+<li>Upload a job description.</li>
+<li>Upload 5 resumes.</li>
+<li>Show the extracted skills per candidate.</li>
+<li>Run screening.</li>
+<li>Show ranked candidates.</li>
+<li>Open a candidate scorecard.</li>
+<li>Show the match explanation and missing skills.</li>
+<li>Show the recruiter feedback option.</li>
+<li>Explain the guardrails and human-review step.</li>
+</ol>
+
+<h2 id="readme">GitHub README structure</h2>
+<div class="code-block"><div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span>markdown</span><button class="copy-btn" type="button">Copy</button></div><pre><code># ATS Resume Screening Assistant
+
+## Problem Statement
+## Features
+## Architecture
+## Tech Stack
+## Setup
+## API Endpoints
+## Data Flow
+## Evaluation Plan
+## Responsible AI Notes
+## Demo Screenshots
+## Future Improvements</code></pre></div>
+
+<h2 id="explain">How to explain it in interviews</h2>
+<div class="callout note"><div class="c-ico">📝</div><div class="c-body"><div class="c-title">90-second answer</div><p>“I built an ATS Resume Screening Assistant as a practical GenAI project for HR candidate shortlisting. The system takes a job description and multiple resumes, extracts structured information like skills, experience, education, projects, and tools, then compares candidates against the job description using embeddings and LLM-based reasoning.</p><p>The goal is not to replace recruiters, but to support them with faster shortlisting, explainable match scores, missing-skill analysis, and candidate summaries. The backend can be exposed through FastAPI APIs, with a simple dashboard for uploading resumes, viewing ranked candidates, and capturing recruiter feedback.</p><p>From a GenAI perspective, this project demonstrates RAG-style retrieval, embedding-based semantic matching, structured output extraction, prompt engineering, evaluation, responsible AI guardrails, and production-style API design. I position it as a practical business GenAI application with human-in-the-loop review.”</p></div></div>
+
+<h2 id="questions">Interview questions</h2>
+<p>Click any question for a model answer, a stronger senior-level answer, follow-ups, the red-flag pattern, what to mention, and how to connect it to GenAI roles.</p>
+<details class="qcard" id="q1"><summary><span class="q-text"><span class="qx">Q1</span><span>Explain the ATS Resume Screening Assistant end to end.</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">project deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests whether you can describe a real GenAI application as a system, not a single prompt.</p><h5>Model answer</h5><p>Lead with problem + flow: HR needs faster, explainable shortlisting. The system takes a job description and many resumes, parses and structures each resume (skills, experience, education, tools), embeds resumes and JD, retrieves/semantically matches candidates, then uses an LLM to produce an explainable match score, missing-skill analysis, and a recruiter summary — with a human reviewing before any decision.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I frame it as a RAG-style pipeline with structured extraction and human-in-the-loop, and call out the responsible-AI constraints up front (decision-support, not decision-maker) because for HR that's a first-class requirement, not an add-on.</p></div><h5>Likely follow-ups</h5><ul><li>What's the hardest part?</li><li>Where does a human step in?</li><li>How big are the resumes / how many?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Describing it as 'the LLM picks the best candidate' — fully automated hiring with no human or guardrails.</div><h5>What to mention from the project</h5><ul><li>JD + multi-resume input</li><li>Structured extraction</li><li>Embeddings + LLM explanation</li><li>Human-in-the-loop review</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">It's a clean showcase of RAG retrieval + structured output + evaluation + guardrails + FastAPI — the exact stack GenAI roles hire for.</p></div></div></div></details><details class="qcard" id="q2"><summary><span class="q-text"><span class="qx">Q2</span><span>How do you match resumes against job descriptions?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Probes whether your matching is principled (semantic + structured) or naive keyword overlap.</p><h5>Model answer</h5><ul><li>Extract structured requirements from the JD (skills, must-haves, experience).</li><li>Extract a structured profile from each resume.</li><li>Embed and semantically match resume content to JD requirements (hybrid: embeddings + keyword for exact tools/certs).</li><li>Score per requirement, then aggregate into an overall match with the LLM explaining the gaps.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I score per-requirement with evidence rather than one opaque number, combine semantic similarity with exact-term matching (a specific cert/tool must match exactly), and keep the LLM's role to explanation/aggregation over retrieved evidence — not free-form judgment.</p></div><h5>Likely follow-ups</h5><ul><li>Semantic vs exact for a required certification?</li><li>How do you weight must-have vs nice-to-have?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Pure keyword overlap, or letting the LLM 'decide' with no structured evidence.</div><h5>What to mention from the project</h5><ul><li>Per-requirement scoring with evidence</li><li>Hybrid semantic + exact matching</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Hybrid retrieval + reranking + grounded LLM reasoning — directly transferable to any RAG product.</p></div></div></div></details><details class="qcard" id="q3"><summary><span class="q-text"><span class="qx">Q3</span><span>Why use embeddings instead of only keyword matching?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Mid–Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Checks you understand semantic matching and its limits.</p><h5>Model answer</h5><p>Keyword matching misses paraphrase and transferable skills — 'built REST APIs' vs 'developed backend services', or 'PyTorch' experience for a 'deep learning' requirement. Embeddings capture meaning, so a strong candidate phrased differently isn't dropped.</p><p>But you still need keyword/exact matching for hard requirements like a specific certification or tool — so the answer is hybrid.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd note embeddings can over-match loosely related text, so I keep exact matching for must-haves and use embeddings for transferable/semantic fit — and validate the mix on labeled JD-resume pairs.</p></div><h5>Likely follow-ups</h5><ul><li>When does semantic matching hurt you?</li><li>How do you handle synonyms for tools?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Claiming embeddings alone solve everything, ignoring exact-match needs.</div><h5>What to mention from the project</h5><ul><li>Transferable-skill matching</li><li>Why hybrid (exact + semantic)</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">This is the dense-vs-sparse-vs-hybrid retrieval discussion every RAG interview has.</p></div></div></div></details><details class="qcard" id="q4"><summary><span class="q-text"><span class="qx">Q4</span><span>How do you prevent hallucinated skills?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>HR + hallucination = real harm; tests grounding discipline.</p><h5>Model answer</h5><ul><li>Ground extraction strictly in the resume text — extract only what's present, with the source span.</li><li>Use structured output (schema) so the model returns fields, not prose.</li><li>Verify each extracted skill maps to evidence in the resume; drop unsupported ones.</li><li>Require citations/evidence in the match explanation.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I add a verification pass that checks each claimed skill against the source text and flags anything unsupported, and I treat a hallucinated skill as a tracked error rate in evaluation — not an occasional annoyance.</p></div><h5>Likely follow-ups</h5><ul><li>How do you measure the hallucination rate?</li><li>What if the resume is ambiguous?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Trusting the LLM's extracted skills with no grounding or verification.</div><h5>What to mention from the project</h5><ul><li>Evidence-grounded extraction</li><li>Verification pass</li><li>Hallucinated-skill rate as a metric</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Grounding + faithfulness verification is the core RAG anti-hallucination pattern.</p></div></div></div></details><details class="qcard" id="q5"><summary><span class="q-text"><span class="qx">Q5</span><span>How do you evaluate the ranking quality?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Separates demo-builders from engineers who measure quality.</p><h5>Model answer</h5><ul><li>Build 20–50 JD-resume pairs and have humans label strong/medium/weak.</li><li>Compare the system's ranking to the human ranking (rank correlation / agreement).</li><li>Track extraction accuracy, hallucinated-skill rate, missing-skill correctness, and explanation quality.</li><li>Track false positives (weak candidate ranked high) and false negatives.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I optimize for not missing strong candidates (false negatives are costly) and treat the labeled set as a regression gate. I'd also run a fairness check that scores don't correlate with protected proxies.</p></div><h5>Likely follow-ups</h5><ul><li>Which error is worse here, FP or FN?</li><li>How do you keep the labeled set fresh?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'It looked reasonable on a few resumes.'</div><h5>What to mention from the project</h5><ul><li>Human-labeled JD-resume pairs</li><li>Ranking agreement + error rates</li><li>Fairness check</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Golden datasets + LLM/eval metrics + human calibration — the LLM-evaluation skill set.</p></div></div></div></details><details class="qcard" id="q6"><summary><span class="q-text"><span class="qx">Q6</span><span>What guardrails are needed for an HR use case?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior/Staff</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>HR is high-risk/regulated; tests responsible-AI maturity.</p><h5>Model answer</h5><ul><li>Decision-support only — never auto-reject/hire; recruiter makes the call.</li><li>Ignore/mask protected attributes (gender, age, religion, caste, race, photo, address, marital status).</li><li>Mask PII where possible.</li><li>Explain every score; store an audit trail; allow recruiter override.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd design the system so protected attributes never enter the features, run disparate-impact audits, keep humans in the loop on every decision, and log decisions for auditability — and I'd refuse to ship full automation.</p></div><h5>Likely follow-ups</h5><ul><li>How do you audit for bias?</li><li>Would you ever auto-reject?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Auto-rejecting candidates, or using/ranking on protected or proxy attributes.</div><h5>What to mention from the project</h5><ul><li>Decision-support not decision-maker</li><li>Protected-attribute exclusion + audit trail</li><li>Recruiter override</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Responsible-AI + guardrails + human-in-the-loop — increasingly its own interview round.</p></div></div></div></details><details class="qcard" id="q7"><summary><span class="q-text"><span class="qx">Q7</span><span>How would you design the FastAPI backend?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests production API design around a GenAI pipeline.</p><h5>Model answer</h5><p>Endpoints: create job (POST /api/jobs), upload resumes (POST /api/resumes/upload), run screening (POST /api/screen), list ranked candidates (GET /api/jobs/{id}/candidates), candidate scorecard (GET /api/candidates/{id}/scorecard), recruiter feedback (POST /api/feedback).</p><p>Separate layers: parsing/extraction, embedding/retrieval, scoring/explanation, and a thin API layer with structured (validated) JSON responses, async for long screening runs, and persistence in Postgres/SQLite.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd make screening async (job queued, results polled/streamed), validate all LLM output against schemas with a repair loop, store an audit trail, and keep the LLM/vector providers behind a swappable interface.</p></div><h5>Likely follow-ups</h5><ul><li>How do you handle a long screening run?</li><li>How do you make LLM output reliable?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">One synchronous endpoint doing parse+embed+LLM with no validation or persistence.</div><h5>What to mention from the project</h5><ul><li>The 6 endpoints + their purpose</li><li>Async screening</li><li>Schema-validated JSON</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Production GenAI API design — exactly what applied GenAI roles build.</p></div></div></div></details><details class="qcard" id="q8"><summary><span class="q-text"><span class="qx">Q8</span><span>How would you deploy and monitor this system?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">deployment</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests whether you can run a GenAI app in production, not just build it.</p><h5>Model answer</h5><ul><li>Containerize with Docker; deploy the FastAPI service (and a Streamlit/React dashboard).</li><li>Trace each screening run (resumes processed, tokens, cost, latency, errors).</li><li>Monitor extraction/hallucination rate, ranking agreement, and recruiter override rate.</li><li>Add fallbacks for LLM/provider failures and validate output schemas.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd reuse the same observability discipline as any service — traces, cost/latency dashboards, alerting — plus GenAI-specific quality monitoring (sampled faithfulness, override rate as a quality signal) and an audit log for compliance.</p></div><h5>Likely follow-ups</h5><ul><li>What would you alert on?</li><li>How do you handle a provider outage mid-run?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Monitoring only uptime, ignoring extraction/ranking quality and cost.</div><h5>What to mention from the project</h5><ul><li>Docker deploy</li><li>Traces + quality + cost monitoring</li><li>Audit log</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">LLMOps/observability + deployment — a core GenAI production skill.</p></div></div></div></details>
+<div class="page-nav"><a href="../projects/my-real-project-stories.html"><div class="dir">← Previous</div><div class="ttl">My Real Project Stories</div></a><a class="next" href="../projects/document-qna-rag-app.html"><div class="dir">Next →</div><div class="ttl">Document QnA RAG App</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#summary">Project summary</a><a href="#proves">What this proves in interviews</a><a href="#features">Core features</a><a href="#architecture">Architecture</a><a href="#stack">Tech stack</a><a href="#api">API design</a><a href="#datamodel">Data model</a><a href="#eval">Evaluation plan</a><a href="#responsible">Responsible AI & guardrails</a><a href="#failures">Failure modes</a><a href="#demo">3-minute demo script</a><a href="#readme">GitHub README structure</a><a href="#explain">How to explain it in interviews</a><a href="#questions">Interview questions</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

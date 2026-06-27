@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank · LLM Evaluation — GenAI Interview Hub</title>
+<meta name="description" content="Strong seniority signal. See also LLM Evaluation.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">Question Bank / <b>07 · LLM Evaluation</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> Question Bank</div>
+<h1>Question Bank · LLM Evaluation</h1>
+<p class="lead">Strong seniority signal. See also <a href='../pages/llm-evaluation.html#questions'>LLM Evaluation</a>.</p>
+<div class="meta-row"><span class="pill purple">LLM Evaluation</span><span class="pill ">4 questions</span></div>
+
+<h2 id="questions">Interview questions on this topic (4)</h2><p>Click any question to reveal a model answer, a stronger senior-level answer, likely follow-ups and the red-flag pattern interviewers listen for.</p><details class="qcard" id="how-do-you-evaluate-a-genai-feature-before-and-after-shippin-0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you evaluate a GenAI feature, before and after shipping?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><ul><li><strong>Offline</strong> — run a curated 'golden' set of test cases before deploy, like a test suite, and block the release if quality drops.</li><li><strong>Online</strong> — sample real production traffic and score it with the same checks, plus capture user feedback (thumbs up/down).</li><li>For RAG, split the metrics into retrieval quality and answer quality.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior runs evaluation as CI (no change ships without passing the golden set) and closes the loop — every production failure becomes a new test case.</p></div><h5>Likely follow-ups</h5><ul><li>How big should the golden set be?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'We manually check a few outputs.'</div><h5>Related hands-on task / project</h5><p><a href='../pages/llm-evaluation.html#hands-on'>Eval hands-on</a>.</p></div></details><details class="qcard" id="how-do-you-trust-an-llm-as-judge-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you trust an LLM-as-judge?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>LLM-as-judge means using an LLM to score outputs. To trust it:</p><ul><li>Give it a clear scoring rubric and low temperature.</li><li>Prefer comparing against a reference answer or pairwise comparisons.</li><li>Check its scores against a sample of human labels (calibration).</li><li>Watch for biases — it may favor longer answers or the first option.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior measures the judge's agreement with humans on a labeled sample, uses a different/stronger model as judge than the one being judged, and versions the judge prompt.</p></div><h5>Likely follow-ups</h5><ul><li>What if the same model is judge and generator?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Treating judge scores as ground truth with no calibration.</div><h5>Source / evidence</h5><p><a href="https://docs.ragas.io/" target="_blank" rel="noopener">RAGAS — RAG evaluation metrics</a></p></div></details><details class="qcard" id="what-is-a-golden-dataset-and-how-big-should-it-be-2"><summary><span class="q-text"><span class="qx">Q</span><span>What is a golden dataset, and how big should it be?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Mid–Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>A golden dataset is a curated set of test inputs with expected answers or pass/fail criteria, used to measure quality and catch regressions.</p><ul><li>Coverage matters more than size — 30–200 well-chosen cases beat thousands of near-duplicates.</li><li>Include happy paths, edge cases, adversarial inputs, and 'should say I don't know' cases.</li><li>Grow it from real production failures.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior tags cases by category (so they can see which type regressed) and keeps a permanent adversarial slice as a gate.</p></div><h5>Likely follow-ups</h5><ul><li>How do you keep it from going stale?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Thinking you need thousands of cases before you can start.</div></div></details><details class="qcard" id="offline-eval-passes-but-users-complain-what-do-you-do-3"><summary><span class="q-text"><span class="qx">Q</span><span>Offline eval passes but users complain — what do you do?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>It means your golden set doesn't reflect real usage. So:</p><ul><li>Sample the failing production traffic and look at what actually went wrong.</li><li>Add those cases to the golden set.</li><li>Check whether the input distribution has drifted (users asking new kinds of questions).</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior closes the loop online → golden set continuously, and monitors input drift so they catch the shift before users do.</p></div><h5>Likely follow-ups</h5><ul><li>How do you detect drift without labels?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Insisting it must be fine because offline passed.</div></div></details>
+<div class="page-nav"><a href="../qbank/frameworks.html"><div class="dir">← Previous</div><div class="ttl">LangChain / LangGraph / LlamaIndex</div></a><a class="next" href="../qbank/llmops.html"><div class="dir">Next →</div><div class="ttl">LLMOps & Observability</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#questions">Interview questions on this topic (4)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

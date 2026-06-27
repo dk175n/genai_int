@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design · Customer Support Bot — GenAI Interview Hub</title>
+<meta name="description" content="A customer-facing support assistant over a help center: answer with citations, escalate when unsure, integrate with ticketing. Trust and deflection are the">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">System Design / <b>02 · Customer Support Bot</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> System Design</div>
+<h1>Design · Customer Support Bot</h1>
+<p class="lead">A customer-facing support assistant over a help center: answer with citations, escalate when unsure, integrate with ticketing. Trust and deflection are the design axes.</p>
+<div class="meta-row"><span class="pill blue">Design round</span></div>
+<h2 id="intro">The brief</h2><p>Customer-facing RAG. Differs from the internal assistant in that users are external (higher injection/abuse risk), wrong answers hurt the brand, and it must hand off to human agents cleanly.</p>
+<h2 id="clarify">Clarifying questions to ask first</h2><ul><li>Channels (web chat, email, in-app)?</li><li>Tone/brand constraints?</li><li>Ticketing system to integrate with?</li><li>What's the cost of a wrong answer vs an escalation?</li><li>Multilingual?</li></ul>
+<h2 id="functional">Functional requirements</h2><ul><li>Answer from KB with citations</li><li>Escalate to human + create ticket with context</li><li>Multichannel</li><li>Capture CSAT/feedback</li><li>Surface KB gaps</li></ul>
+<h2 id="nonfunctional">Non-functional requirements</h2><ul><li>Low latency (live chat)</li><li>High groundedness (brand risk)</li><li>Abuse/injection resistance</li><li>Cost/conversation budget</li></ul>
+<h2 id="architecture">Architecture</h2><div class="ragflow lr"><div class="rf"><div>User (web/app)</div></div><div class="arr"></div><div class="rf"><div>Input guard<small>abuse·injection</small></div></div><div class="arr"></div><div class="rf accent"><div>Hybrid retrieve KB</div></div><div class="arr"></div><div class="rf"><div>Coverage gate → answer/escalate</div></div><div class="arr"></div><div class="rf"><div>Ticket + feedback</div></div></div>
+<h2 id="ingestion">Data ingestion layer</h2><p>Help-center articles + past resolved tickets → chunk → embed → index with product/category metadata and 'last reviewed' date.</p>
+<h2 id="retrieval">Retrieval layer</h2><p>Hybrid + rerank, scoped to the product/locale. Coverage gate decides answer vs escalate.</p>
+<h2 id="orchestration">Model / orchestration layer</h2><p>Grounded, on-brand prompt with citations and abstain. Bias toward escalation when confidence is low. Bounded conversation memory.</p>
+<h2 id="safety">Safety layer</h2><p>Stronger input guards (external users): abuse, jailbreak, injection. Output: groundedness, no internal-only info, policy/brand checks.</p>
+<h2 id="evaluation">Evaluation layer</h2><p>Golden set + deflection metric (correct auto-answer vs correct escalation) + faithfulness; A/B on escalation threshold.</p>
+<h2 id="observability">Observability layer</h2><p>Trace + CSAT, deflection rate, escalation precision, cost/conversation; alert on faithfulness drops.</p>
+<h2 id="costlatency">Cost & latency tradeoffs</h2><div class="table-wrap"><table><thead><tr><th>Lever</th><th>Effect</th><th>Tradeoff</th></tr></thead><tbody><tr><td>Cache common FAQs</td><td>↓ cost/latency</td><td>Staleness</td></tr><tr><td>Small model for FAQ</td><td>↓ cost</td><td>Eval-gated</td></tr><tr><td>Stream answers</td><td>↓ perceived latency</td><td>Mid-stream guard harder</td></tr></tbody></table></div>
+<h2 id="failures">Failure modes</h2><ul><li>Confident wrong answer → coverage gate, bias to escalate</li><li>External injection/abuse → input guards</li><li>Bad handoff loses context → pass transcript+retrieval to ticket</li><li>KB stale → review dates + re-index</li></ul>
+<h2 id="tenmin">How to explain this design in 10 minutes</h2><p>Clarify channels + cost-of-wrong-answer; draw RAG + coverage gate + escalation; stress external-user safety; cover deflection/CSAT eval and the human handoff; close with tradeoffs.</p>
+<h2 id="interruptions">Common interviewer interruptions & how to answer</h2><div class="table-wrap"><table><thead><tr><th>Interviewer says…</th><th>How to answer</th></tr></thead><tbody><tr><td>“What if retrieval returns nothing relevant?”</td><td>Coverage gate → abstain or escalate; never force an answer. Measure abstain-correctness.</td></tr><tr><td>“This will be too expensive.”</td><td>Cache + route to a smaller model for easy traffic; show cost/req and that quality held on eval.</td></tr><tr><td>“How do you know it's any good?”</td><td>Golden set offline as a deploy gate + sampled online judging; split retrieval vs generation metrics.</td></tr><tr><td>“What about data the user shouldn't see?”</td><td>Access control enforced at retrieval, not the prompt; per-tenant filters or separate indexes.</td></tr><tr><td>“What happens when the model provider goes down?”</td><td>Timeouts, fallback model/provider, graceful degradation to cached/smaller answers.</td></tr></tbody></table></div>
+<h2 id="questions">Interview questions on this design (3)</h2><details class="qcard" id="how-do-you-balance-deflection-auto-answering-against-giving--0"><summary><span class="q-text"><span class="qx">Q</span><span>How do you balance deflection (auto-answering) against giving wrong answers?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Set a coverage/faithfulness gate and bias toward escalation; measure escalation precision and CSAT alongside deflection so you don't optimize deflection at the cost of trust.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I treat a confident wrong answer as more expensive than an escalation and tune thresholds accordingly, A/B testing the threshold on real traffic. Every escalation feeds the KB-gap and eval loop.</p></div><h5>Likely follow-ups</h5><ul><li>How do you hand off to a human without losing context?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Maximizing deflection regardless of correctness.</div></div></details><details class="qcard" id="how-do-you-defend-a-customer-facing-bot-against-abuse-and-pr-1"><summary><span class="q-text"><span class="qx">Q</span><span>How do you defend a customer-facing bot against abuse and prompt injection?</span></span><span class="q-tags"><span class="qtag senior">Senior</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-high">freq: high</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>External users mean stronger input guards: rate limiting, abuse/jailbreak detection, and injection checks. Treat the KB content as untrusted too (indirect injection). Output guard blocks internal-only info, PII and off-brand content before replying.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior assumes hostile input by default, keeps the bot scoped to a narrow domain (out-of-scope → escalate), and limits blast radius since it's internet-facing.</p></div><h5>Likely follow-ups</h5><ul><li>How do you stop it answering off-topic questions?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Treating an external bot with the same trust as an internal tool.</div></div></details><details class="qcard" id="what-s-your-evaluation-and-rollout-plan-for-this-bot-2"><summary><span class="q-text"><span class="qx">Q</span><span>What's your evaluation and rollout plan for this bot?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span><span class="qtag freq-medium">freq: medium</span><span class="qtag ">Both</span></span></summary><div class="q-body"><h5>Model answer</h5><p>Golden set + deflection and escalation-precision metrics offline; shadow/canary on real traffic; A/B the escalation threshold; monitor faithfulness and CSAT. Roll out gradually, gated on quality.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>A senior ships behind a canary with a kill-switch back to human-only, and treats every escalation/thumbs-down as a new eval case and KB-gap.</p></div><h5>Likely follow-ups</h5><ul><li>How do you A/B the escalation threshold safely?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Big-bang launch with no canary or rollback.</div></div></details>
+<div class="page-nav"><a href="../systemdesign/enterprise-knowledge-assistant.html"><div class="dir">← Previous</div><div class="ttl">Enterprise Knowledge Assistant</div></a><a class="next" href="../systemdesign/document-qa-regulated.html"><div class="dir">Next →</div><div class="ttl">Document Q&A for Legal / Finance / HR</div></a></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#intro">The brief</a><a href="#clarify">Clarifying questions to ask first</a><a href="#functional">Functional requirements</a><a href="#nonfunctional">Non-functional requirements</a><a href="#architecture">Architecture</a><a href="#ingestion">Data ingestion layer</a><a href="#retrieval">Retrieval layer</a><a href="#orchestration">Model / orchestration layer</a><a href="#safety">Safety layer</a><a href="#evaluation">Evaluation layer</a><a href="#observability">Observability layer</a><a href="#costlatency">Cost & latency tradeoffs</a><a href="#failures">Failure modes</a><a href="#tenmin">How to explain this design in 10 minutes</a><a href="#interruptions">Common interviewer interruptions & how to answer</a><a href="#questions">Interview questions on this design (3)</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document QnA RAG App — GenAI Interview Hub</title>
+<meta name="description" content="Scalable RAG-based question-answering system over large PDF collections with citations, low-latency retrieval, and production-style architecture.">
+<script>(function(){try{var t=localStorage.getItem("gp.theme")||((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="stylesheet" href="../assets/portal.css">
+</head>
+<body data-hub-depth="1" class="">
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+        <div class="brand-mark">IV</div>
+        <div class="brand-text"><strong>GenAI Interview Hub</strong><span>Interview-first GenAI prep for senior engineers</span></div>
+      </a>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" data-search placeholder="Search the hub…  ( / )">
+      </div>
+      <div class="search-results"></div>
+    </div>
+    <nav class="nav"></nav>
+  </aside>
+  <div class="backdrop"></div>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="crumbs">My Projects & Experience / <b>★D · Document QnA RAG App</b></div>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle theme"></button>
+    </header>
+    <div class="content-wrap">
+      <main class="content">
+<div class="eyebrow"><span class="dot"></span> My Projects & Experience · GenAI portfolio project</div>
+<h1>Document QnA RAG App</h1>
+<p class="lead">Scalable RAG-based question-answering system over large PDF collections with citations, low-latency retrieval, and production-style architecture.</p>
+<div class="meta-row"><span class="pill red">High interview value</span><span class="pill purple">Scalable RAG Project</span><span class="pill blue">Python · FastAPI · RAG</span><span class="pill amber">Vector DB · Async ingestion</span></div>
+<div class="callout warn"><div class="c-ico">⚠️</div><div class="c-body"><div class="c-title">Honest positioning for interviews</div><p>Position this as a scalable GenAI/RAG portfolio project for question answering over large PDF collections. If benchmarked with thousands of PDFs, mention the tested scale and latency numbers. If not yet benchmarked, say it is <strong>designed with an architecture suitable for thousands of documents</strong>, using async ingestion, batch embedding, vector indexing, metadata filtering, caching, reranking, and streaming responses.</div></div>
+
+<h2 id="summary">Project summary</h2>
+<p>Built a Document QnA RAG application that allows users to upload or index large collections of PDFs, ask natural-language questions, retrieve the most relevant document chunks, and generate grounded answers with citations. The system is designed for scalable ingestion, efficient retrieval, low-latency responses, hallucination reduction, and production-style monitoring.</p>
+<div class="table-wrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Domain</strong></td><td>Enterprise Knowledge Search / Document Intelligence / RAG Application</td></tr><tr><td><strong>Role positioning</strong></td><td>GenAI Engineer / RAG Application Developer / Python Backend Engineer</td></tr></tbody></table></div>
+
+<h2 id="proves">What this project proves in interviews</h2>
+<ul>
+<li>Ability to design and build a real RAG application end to end.</li>
+<li>PDF ingestion/parsing; chunking and metadata strategy; embedding generation at scale.</li>
+<li>Vector database usage; hybrid retrieval and reranking; citation-based grounded answering.</li>
+<li>Latency optimization; caching and streaming; async ingestion pipeline.</li>
+<li>RAG evaluation; hallucination reduction; FastAPI backend design.</li>
+<li>Production monitoring/observability and scalable GenAI system-design thinking.</li>
+</ul>
+
+<h2 id="features">Core features</h2>
+<ul>
+<li>Upload multiple PDFs; batch document ingestion; async background processing.</li>
+<li>PDF text extraction; OCR support for scanned PDFs (implemented or planned).</li>
+<li>Chunking with metadata; embedding generation; vector search; metadata filtering; hybrid-search option; reranking.</li>
+<li>Answer generation with citations; source-snippet display; chat history.</li>
+<li>Query caching; response streaming; admin view for ingestion status; trace logging + evaluation dashboard.</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<p><strong>Ingestion (offline / async):</strong></p>
+<div class="ragflow lr"><div class="rf"><div>PDF upload / source</div></div><div class="arr"></div><div class="rf accent"><div>Async ingestion queue</div></div><div class="arr"></div><div class="rf"><div>Parse / OCR</div></div><div class="arr"></div><div class="rf"><div>Clean + metadata</div></div><div class="arr"></div><div class="rf"><div>Chunk</div></div><div class="arr"></div><div class="rf"><div>Batch embed</div></div><div class="arr"></div><div class="rf"><div>Vector DB + metadata store</div></div></div>
+<p><strong>Query (online):</strong></p>
+<div class="ragflow lr"><div class="rf"><div>User question</div></div><div class="arr"></div><div class="rf"><div>Query embedding</div></div><div class="arr"></div><div class="rf accent"><div>Hybrid search / metadata filter</div></div><div class="arr"></div><div class="rf"><div>Rerank</div></div><div class="arr"></div><div class="rf"><div>Context assembly</div></div><div class="arr"></div><div class="rf"><div>LLM answer</div></div><div class="arr"></div><div class="rf"><div>Citations + stream + trace</div></div></div>
+<div class="code-block mermaid-src"><div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span>mermaid</span><button class="copy-btn" type="button">Copy</button></div><pre><code>flowchart TD
+    A[PDF Upload / Document Source] --&gt; B[Async Ingestion Queue]
+    B --&gt; C[PDF Parsing / OCR if needed]
+    C --&gt; D[Text Cleaning + Metadata Extraction]
+    D --&gt; E[Chunking Strategy]
+    E --&gt; F[Batch Embedding Generation]
+    F --&gt; G[Vector DB Index + Metadata Store]
+    H[User Question] --&gt; I[Query Embedding]
+    I --&gt; J[Hybrid Search / Metadata Filter]
+    J --&gt; K[Reranking]
+    K --&gt; L[Context Assembly]
+    L --&gt; M[LLM Answer Generation]
+    M --&gt; N[Citations + Source Snippets]
+    N --&gt; O[Response Streaming + Trace Logging]</code></pre></div><div class="diagram-caption">Offline ingestion builds the index; the online query path stays light: embed → retrieve → rerank → generate → stream.</div>
+
+<h2 id="stack">Tech stack</h2>
+<div class="table-wrap"><table><thead><tr><th>Concern</th><th>Tech / note</th></tr></thead><tbody><tr><td>Backend</td><td>Python, FastAPI</td></tr><tr><td>RAG plumbing</td><td>LangChain or LlamaIndex</td></tr><tr><td>LLM</td><td>OpenAI / Gemini / Claude APIs</td></tr><tr><td>Vector DB</td><td>FAISS (local/demo) · Qdrant / Pinecone / pgvector (service/production-style)</td></tr><tr><td>Metadata store</td><td>PostgreSQL</td></tr><tr><td>Cache</td><td>Redis — caches repeated queries & intermediate results</td></tr><tr><td>Async jobs</td><td>Celery / RQ — process large document ingestion asynchronously</td></tr><tr><td>Deploy</td><td>Docker, Kubernetes</td></tr><tr><td>Tracing</td><td>Langfuse or LangSmith — trace prompts, retrieval, latency, answer quality</td></tr></tbody></table></div>
+
+<h2 id="scaling">How this system handles thousands of PDFs</h2>
+<ul>
+<li>Do not process all PDFs at query time — ingest and index offline/asynchronously.</li>
+<li>Store chunks and metadata in a vector database; use batch embedding (not one-by-one).</li>
+<li>Use document-level metadata filters to reduce the search space; use hybrid search when keyword precision matters.</li>
+<li>Use approximate nearest-neighbor (ANN) search for fast retrieval; rerank only a small candidate set.</li>
+<li>Cache frequent queries and retrieved contexts; stream the final answer so the user sees output quickly.</li>
+<li>Use background workers for large ingestion jobs; track ingestion status per document.</li>
+<li>Store citations and source chunk IDs; monitor retrieval latency, LLM latency, and total response time.</li>
+</ul>
+
+<h2 id="latency">How to reduce latency and lag</h2>
+<p>Latency is reduced by moving expensive work out of the user query path. Document parsing, chunking, embedding generation, and indexing should happen asynchronously before the user asks a question. At query time, the system should only embed the query, retrieve a small candidate set from the vector DB, optionally rerank top results, build a compact prompt, and stream the LLM response. Additional optimizations: Redis caching, metadata filtering, ANN indexes, smaller/faster embedding models, prompt compression, top-k tuning, model fallback, and monitoring p95 latency.</p>
+<div class="table-wrap"><table><thead><tr><th>Optimization</th><th>Benefit</th><th>Tradeoff</th></tr></thead><tbody><tr><td>Async ingestion</td><td>Fast query-time response</td><td>More backend complexity</td></tr><tr><td>Batch embeddings</td><td>Lower ingestion cost/time</td><td>Needs queue and retry logic</td></tr><tr><td>Metadata filtering</td><td>Smaller search space</td><td>Requires good metadata</td></tr><tr><td>ANN vector search</td><td>Faster retrieval</td><td>Approximate results</td></tr><tr><td>Reranking top 20 only</td><td>Better relevance</td><td>Adds extra latency</td></tr><tr><td>Redis cache</td><td>Faster repeated queries</td><td>Cache invalidation needed</td></tr><tr><td>Streaming</td><td>Better user experience</td><td>Does not reduce total compute</td></tr><tr><td>Smaller LLM</td><td>Lower latency/cost</td><td>May reduce answer quality</td></tr><tr><td>Prompt compression</td><td>Faster LLM response</td><td>Risk of losing context</td></tr></tbody></table></div>
+
+<h2 id="api">API design</h2>
+<div class="table-wrap"><table><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody><tr><td>POST /api/documents/upload</td><td>Upload one or more PDFs for ingestion</td></tr><tr><td>GET /api/documents/{document_id}/status</td><td>Check ingestion/processing status of a document</td></tr><tr><td>POST /api/collections</td><td>Create a document collection (namespace)</td></tr><tr><td>POST /api/collections/{collection_id}/ingest</td><td>Trigger async ingestion of a collection</td></tr><tr><td>POST /api/query</td><td>Ask a question; returns a grounded answer with citations</td></tr><tr><td>GET /api/query/{query_id}/trace</td><td>Retrieve the trace (retrieval, prompt, latency) for a query</td></tr><tr><td>GET /api/sources/{chunk_id}</td><td>Fetch a source chunk/snippet behind a citation</td></tr><tr><td>POST /api/feedback</td><td>Capture user feedback on an answer</td></tr></tbody></table></div>
+
+<h2 id="datamodel">Data model</h2>
+<div class="table-wrap"><table><thead><tr><th>Entity</th><th>Holds</th></tr></thead><tbody><tr><td>Document</td><td>Uploaded file metadata + ingestion state</td></tr><tr><td>DocumentChunk</td><td>A chunk of a document + position/metadata</td></tr><tr><td>Collection</td><td>A namespace/group of documents (access scope)</td></tr><tr><td>EmbeddingRecord</td><td>Vector + chunk reference</td></tr><tr><td>Query</td><td>A user question + parameters</td></tr><tr><td>RetrievedChunk</td><td>Chunks returned for a query + scores</td></tr><tr><td>Answer</td><td>Generated answer text</td></tr><tr><td>Citation</td><td>Link from a claim to a source chunk</td></tr><tr><td>Feedback</td><td>User rating/notes on an answer</td></tr><tr><td>IngestionJob</td><td>Async job + per-document status</td></tr><tr><td>TraceLog</td><td>Retrieval/prompt/latency trace for a query</td></tr></tbody></table></div>
+
+<h2 id="eval">Evaluation plan</h2>
+<ul>
+<li>Create a golden question–answer dataset with known source documents.</li>
+<li>Measure retrieval precision@k, answer groundedness, citation accuracy, and hallucination rate.</li>
+<li>Measure response latency p50/p95 and failed-ingestion rate.</li>
+<li>Compare dense vs hybrid search, and with vs without reranking.</li>
+<li>Add a human feedback loop; review bad answers and update chunking/retrieval strategy.</li>
+</ul>
+
+<h2 id="benchmark">Benchmarking & next steps</h2>
+<p>The next step for this project is not more documentation. The next step is to build, test, and benchmark the system with real documents. Benchmark numbers make the project much stronger in interviews because they prove that the RAG system was not only designed, but also measured.</p>
+
+<h3>What to track while building</h3>
+<ul>
+<li>Number of PDFs indexed</li>
+<li>Number of pages processed</li>
+<li>Number of chunks generated</li>
+<li>Chunk size and overlap used</li>
+<li>Embedding model used</li>
+<li>Vector database used</li>
+<li>Ingestion time</li>
+<li>Average retrieval latency</li>
+<li>p50 answer latency</li>
+<li>p95 answer latency</li>
+<li>Top-k retrieval accuracy</li>
+<li>Citation accuracy</li>
+<li>Hallucination or unsupported-answer cases</li>
+<li>Failed document parsing count</li>
+<li>OCR failure cases, if scanned PDFs are used</li>
+<li>Token usage per query</li>
+<li>Cost per 100 queries, if using paid APIs</li>
+<li>Cache hit rate, if Redis/query caching is implemented</li>
+</ul>
+
+<h3>Why these metrics matter in interviews</h3>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Why interviewers care</th></tr></thead><tbody><tr><td>Number of PDFs indexed</td><td>Shows actual scale, not only design intent</td></tr><tr><td>Number of chunks generated</td><td>Shows understanding of chunking and indexing volume</td></tr><tr><td>Ingestion time</td><td>Shows backend pipeline performance</td></tr><tr><td>Retrieval latency</td><td>Shows vector DB and search performance</td></tr><tr><td>p50 / p95 answer latency</td><td>Shows production-readiness thinking</td></tr><tr><td>Citation accuracy</td><td>Shows grounded generation quality</td></tr><tr><td>Top-k retrieval accuracy</td><td>Shows retrieval quality</td></tr><tr><td>Hallucination cases</td><td>Shows awareness of RAG failure modes</td></tr><tr><td>Token usage / cost</td><td>Shows practical LLMOps thinking</td></tr><tr><td>Cache hit rate</td><td>Shows optimization beyond basic RAG</td></tr></tbody></table></div>
+
+<h3>Interview-ready benchmark statement</h3>
+<p>After benchmarking, convert the results into one crisp interview line. Do not invent numbers. Use actual tested values.</p>
+<div class="callout note"><div class="c-ico">📝</div><div class="c-body"><div class="c-title">Example (sample wording — replace with your real tested numbers)</div><p><em>Example after benchmarking:</em> “I tested the RAG app with 1,000 PDFs, generated around 85,000 chunks, stored them in Qdrant, and kept retrieval latency under 400 ms for top-k retrieval. End-to-end answer latency was around 4–6 seconds depending on the LLM, with streaming enabled.”</p><p style='margin:6px 0 0;font-size:12.5px;color:var(--text-muted)'>These figures are illustrative placeholders, not measured results — substitute your own.</p></div></div>
+<div class="callout warn"><div class="c-ico">⚠️</div><div class="c-body"><div class="c-title">Do not overclaim scale</div><p>Until real benchmarking is done, say the system is <strong>designed for large PDF collections</strong> or <strong>architected for thousands of documents</strong>. After testing, mention the actual number of PDFs, chunks, latency, and evaluation results.</div></div>
+
+<h3>Practical next build steps</h3>
+<ol>
+<li>Build the ingestion pipeline for PDF upload and parsing.</li>
+<li>Add chunking with metadata such as file name, page number, section title, and chunk ID.</li>
+<li>Generate embeddings in batches.</li>
+<li>Store chunks in the chosen vector database.</li>
+<li>Build the <code>/api/query</code> endpoint for retrieval and answer generation.</li>
+<li>Add citations using source document ID, page number, and chunk ID.</li>
+<li>Add Redis or simple query caching.</li>
+<li>Add response streaming.</li>
+<li>Create a small golden question-answer dataset.</li>
+<li>Measure retrieval quality, citation accuracy, and latency.</li>
+<li>Add a simple benchmark report section to the README.</li>
+<li>Update the portal page later with real tested numbers.</li>
+</ol>
+<div class="callout tip"><div class="c-ico">✅</div><div class="c-body"><div class="c-title">Project upgrade path →</div><p>Once the app is built and benchmarked, update this page with real numbers: PDFs indexed, chunks generated, vector DB used, p50/p95 latency, citation accuracy, and known failure cases. These numbers will make the project much stronger in GenAI interviews.</div></div>
+
+<h2 id="failures">Failure modes</h2>
+<ul>
+<li>Bad PDF extraction; scanned PDFs without OCR; poor chunking; missing metadata.</li>
+<li>Embedding model mismatch; vector DB returns semantically similar but wrong chunks.</li>
+<li>Reranker latency too high; too many chunks in prompt; LLM hallucination; missing citations.</li>
+<li>Stale document index; slow ingestion; query timeout; high token cost; user asks outside available documents.</li>
+</ul>
+
+<h2 id="guardrails">Guardrails & security</h2>
+<div class="callout danger"><div class="c-ico">⛔</div><div class="c-body"><div class="c-title">Document Q&A needs real guardrails</div><ul style='margin:0'><li>Answer only from retrieved documents where required; say “I could not find this in the documents” when evidence is missing.</li><li>Show citations for every factual claim.</li><li>Restrict access by collection or user role; never expose documents across users; protect sensitive documents.</li><li>Validate file type/size; scan uploads if needed.</li><li>Log prompts/responses carefully; don't store sensitive data in traces unless masked.</li><li>Handle prompt injection hidden inside documents (treat document text as untrusted).</li></ul></div></div>
+
+<h2 id="demo">3-minute demo script</h2>
+<ol>
+<li>Upload or select a PDF collection.</li>
+<li>Show ingestion status.</li>
+<li>Ask a question.</li>
+<li>Show retrieved source snippets.</li>
+<li>Show the answer with citations.</li>
+<li>Ask a follow-up question.</li>
+<li>Show the latency/trace view.</li>
+<li>Show the feedback button.</li>
+<li>Explain how the system scales to thousands of documents.</li>
+</ol>
+
+<h2 id="readme">GitHub README structure</h2>
+<div class="code-block"><div class="code-head"><span class="lang"><span class="dots"><i></i><i></i><i></i></span>markdown</span><button class="copy-btn" type="button">Copy</button></div><pre><code># Document QnA RAG App
+
+## Problem Statement
+## Features
+## Architecture
+## Tech Stack
+## Setup
+## Document Ingestion
+## Chunking Strategy
+## Vector DB Setup
+## API Endpoints
+## Query Flow
+## Evaluation Plan
+## Latency Optimization
+## Security and Guardrails
+## Demo Screenshots
+## Future Improvements</code></pre></div>
+
+<h2 id="explain">How to explain it in interviews</h2>
+<div class="callout note"><div class="c-ico">📝</div><div class="c-body"><div class="c-title">90-second answer</div><p>“I built a Document QnA RAG application for answering questions over large PDF collections. The system ingests PDFs, extracts text, chunks the content with metadata, generates embeddings, stores them in a vector database, and retrieves the most relevant chunks when a user asks a question. The LLM then generates an answer grounded in the retrieved context and returns citations to the original source documents.</p><p>The important design point is that expensive work like parsing, chunking, embedding, and indexing is done asynchronously before query time. At query time, the app only embeds the user question, performs vector or hybrid retrieval, optionally reranks the top candidates, builds a compact prompt, and streams the answer. This keeps the system usable even when the document collection is large.</p><p>From an interview perspective, this project demonstrates RAG architecture, vector search, chunking strategy, retrieval optimization, latency reduction, citation-based answering, hallucination control, FastAPI backend design, and production-style monitoring.</p><p>Once benchmarked, I would mention the actual tested document count, chunk count, retrieval latency, p50/p95 response latency, and citation accuracy to make the project explanation measurable.”</p></div></div>
+
+<h2 id="questions">Interview questions</h2>
+<p>Click any question for a model answer, a stronger senior-level answer, follow-ups, the red-flag pattern, what to mention, and how to connect it to GenAI roles.</p>
+<details class="qcard" id="q1"><summary><span class="q-text"><span class="qx">Q1</span><span>Explain the Document QnA RAG app end to end.</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">project deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests whether you can describe a RAG system as an end-to-end pipeline, separating offline ingestion from online query.</p><h5>Model answer</h5><p>Two halves. <strong>Offline (ingestion):</strong> upload/index PDFs → parse (OCR if scanned) → clean + extract metadata → chunk → batch-embed → store in a vector DB with metadata. <strong>Online (query):</strong> embed the question → hybrid/vector search with metadata filters → rerank the top candidates → assemble a compact context → LLM generates a grounded answer with citations → stream the response and log a trace.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I stress the design principle: all expensive work (parse/chunk/embed/index) happens asynchronously before query time, so the query path only does embed → retrieve → rerank → generate → stream. That's what keeps it usable at large scale.</p></div><h5>Likely follow-ups</h5><ul><li>Where does it get slow?</li><li>How do you keep the index fresh?</li><li>What's the trickiest part of ingestion?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Describing it as 'load all PDFs and ask the LLM' — processing documents at query time.</div><h5>What to mention from the project</h5><ul><li>Async ingestion vs query path</li><li>Hybrid retrieval + rerank</li><li>Citations + trace logging</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">This is the canonical production RAG pipeline — the exact architecture applied GenAI roles build and probe.</p></div></div></div></details><details class="qcard" id="q2"><summary><span class="q-text"><span class="qx">Q2</span><span>How do you handle thousands of PDFs without making the app slow?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Scale is the headline claim — they test whether your architecture actually supports it.</p><h5>Model answer</h5><ul><li>Don't process PDFs at query time — ingest and index offline/asynchronously.</li><li>Store chunks + metadata in a vector DB; use ANN search for fast retrieval.</li><li>Batch-embed during ingestion; use background workers for large jobs.</li><li>Narrow the search with document-level metadata filters; rerank only a small candidate set.</li><li>Cache frequent queries/contexts; stream answers.</li></ul><p>The strongest answer should include actual benchmark numbers once available — number of PDFs indexed, chunks generated, vector DB used, retrieval latency, and p95 answer latency. Until then, frame it as a scalable design and do not invent numbers.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd frame it honestly: the architecture is <em>designed</em> for thousands of documents (async ingestion, ANN, metadata filtering, caching) — and I'd quote tested scale/latency only if I've actually benchmarked it. Query cost stays roughly flat with corpus size because retrieval returns a small top-k regardless of total documents.</p></div><h5>Likely follow-ups</h5><ul><li>What's your tested scale?</li><li>Why doesn't query latency grow with corpus size?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Claiming benchmarked scale with no numbers, or implying all docs are scanned per query.</div><h5>What to mention from the project</h5><ul><li>Offline async ingestion</li><li>ANN + metadata filter</li><li>Top-k keeps query cost flat</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Scalable RAG/system-design thinking — a senior GenAI signal.</p></div></div></div></details><details class="qcard" id="q3"><summary><span class="q-text"><span class="qx">Q3</span><span>How do you reduce latency during question answering?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Latency is the most common production complaint about RAG; tests practical optimization.</p><h5>Model answer</h5><p>Move expensive work out of the query path (parse/chunk/embed/index happen at ingestion). At query time only: embed the question, retrieve a small candidate set (ANN), optionally rerank top results, build a compact prompt, and stream the answer.</p><p>Add Redis caching, metadata filtering, smaller/faster embedding models, prompt compression, top-k tuning, and monitor p95.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I optimize against a p95 SLO and measure per-stage latency from traces first (retrieval vs rerank vs LLM) so I fix the real bottleneck. Streaming improves perceived latency but not total compute — I'm explicit about that.</p></div><h5>Likely follow-ups</h5><ul><li>Which stage is usually slowest?</li><li>Does streaming reduce total time?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Guessing optimizations without measuring per-stage latency.</div><h5>What to mention from the project</h5><ul><li>Work out of query path</li><li>Per-stage latency from traces</li><li>Streaming = perceived not total</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">LLMOps latency optimization — core to production GenAI roles.</p></div></div></div></details><details class="qcard" id="q4"><summary><span class="q-text"><span class="qx">Q4</span><span>What tech stack did you use and why?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests whether your tool choices are reasoned, not cargo-culted.</p><h5>Model answer</h5><p>Python + FastAPI backend; LangChain/LlamaIndex for RAG plumbing; an embedding model + a vector DB; Postgres for metadata; Redis for caching; Celery/RQ for async ingestion; Docker/Kubernetes for deploy; Langfuse/LangSmith for tracing.</p><ul><li>FAISS for local/demo vector search; Qdrant/Pinecone/pgvector for service/production-style.</li><li>Redis caches repeated queries/intermediate results.</li><li>Celery/RQ processes large ingestion asynchronously.</li><li>Langfuse/LangSmith traces prompts, retrieval, latency, quality.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I'd justify by constraints: pgvector if already on Postgres, Qdrant for large filtered workloads, FAISS only for local demos. I keep the LLM/vector providers behind a swappable interface so nothing is locked in.</p></div><h5>Likely follow-ups</h5><ul><li>FAISS vs Qdrant for production?</li><li>Why a separate queue for ingestion?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Listing trendy tools with no reasoning or scale context.</div><h5>What to mention from the project</h5><ul><li>Vector DB choice by constraint</li><li>Redis + Celery roles</li><li>Tracing with Langfuse/LangSmith</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Production GenAI stack fluency.</p></div></div></div></details><details class="qcard" id="q5"><summary><span class="q-text"><span class="qx">Q5</span><span>How did you choose chunk size and overlap?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Chunking is the highest-leverage RAG quality decision.</p><h5>Model answer</h5><p>Tune against a labeled query set, not by habit. Smaller chunks → precise matching but answers can split; larger → more context but diluted embeddings and wasted window. Start ~400–512 tokens with ~10–20% overlap; respect the embedding model's max length.</p><p>Often best: parent-document retrieval — embed small chunks, return the larger surrounding passage.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I check whether answers span chunk boundaries and measure recall@k across a few sizes, and I keep page/section metadata so citations stay precise.</p></div><h5>Likely follow-ups</h5><ul><li>What overlap and why?</li><li>How does chunk size affect citations?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">A fixed number with no measurement.</div><h5>What to mention from the project</h5><ul><li>Measured chunk sizing</li><li>Parent-document retrieval</li><li>Metadata for citations</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Directly transferable RAG-quality skill.</p></div></div></div></details><details class="qcard" id="q6"><summary><span class="q-text"><span class="qx">Q6</span><span>Which vector database would you use and why?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">system design</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests pragmatic infra choice vs hype.</p><h5>Model answer</h5><ul><li><strong>FAISS</strong> — local/offline/demo, in-process.</li><li><strong>pgvector</strong> — already on Postgres, moderate scale, SQL filters.</li><li><strong>Qdrant/Pinecone</strong> — large scale, heavy metadata filtering, service-style.</li></ul><p>Choose by scale, filtering needs, and ops appetite.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I avoid adopting a heavy vector DB before scale needs it — pgvector covers a lot. For this project's 'thousands of PDFs' goal with metadata filters, Qdrant or pgvector are the realistic picks; FAISS is for the local demo.</p></div><h5>Likely follow-ups</h5><ul><li>When is FAISS not enough?</li><li>How do you do metadata filtering?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Defaulting to the trendiest DB regardless of scale.</div><h5>What to mention from the project</h5><ul><li>FAISS demo vs Qdrant/pgvector production</li><li>Metadata filtering need</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Embeddings/vector-DB design — high-frequency RAG topic.</p></div></div></div></details><details class="qcard" id="q7"><summary><span class="q-text"><span class="qx">Q7</span><span>Dense search vs hybrid search — which is better for document Q&A?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests understanding of retrieval beyond plain embeddings.</p><h5>Model answer</h5><p>Dense (embeddings) captures meaning/paraphrase; sparse (BM25) catches exact terms — IDs, codes, names, acronyms common in documents. Hybrid fuses both and is the production default for document Q&A.</p><p>Rerank the fused candidates for precision.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I weight by content: documents with many exact identifiers (legal/finance/technical) lean more on keyword; conversational FAQ leans dense. I validate the mix on labeled pairs.</p></div><h5>Likely follow-ups</h5><ul><li>How do you fuse the two lists?</li><li>When does dense-only fail?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Insisting embeddings alone are always enough.</div><h5>What to mention from the project</h5><ul><li>Hybrid default for docs</li><li>Fusion + rerank</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Dense/sparse/hybrid is a guaranteed RAG interview topic.</p></div></div></div></details><details class="qcard" id="q8"><summary><span class="q-text"><span class="qx">Q8</span><span>Why and when would you use reranking?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Tests precision/latency tradeoff awareness.</p><h5>Model answer</h5><p>First-pass retrieval is fast but imprecise. A cross-encoder reranker reads query+chunk together and reorders the top candidates so only the best few enter the prompt — keeping context small and precise. Run it only on the top ~20–50, not the whole corpus.</p><p>Tradeoff: it adds latency, so it's applied to a small candidate set.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I measure the recall@k / faithfulness lift to justify the added latency, and keep the candidate set small so reranking stays within the latency budget.</p></div><h5>Likely follow-ups</h5><ul><li>Why not rerank everything?</li><li>How much latency does it add?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Stuffing many un-reranked chunks into the prompt.</div><h5>What to mention from the project</h5><ul><li>Rerank small candidate set</li><li>Smaller, precise context</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Reranking is a core production RAG lever.</p></div></div></div></details><details class="qcard" id="q9"><summary><span class="q-text"><span class="qx">Q9</span><span>How do you add citations to answers?</span></span><span class="q-tags"><span class="qtag intermediate">Intermediate</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Citations are what make document Q&A trustworthy and auditable.</p><h5>Model answer</h5><p>Pass each retrieved chunk with an id + source metadata (file, page). Instruct the model to cite the id behind each claim (e.g. [1]), and map ids back to source snippets in the response. Display the source snippet alongside the answer.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I verify the cited chunk actually supports the claim (not just that a citation exists), and treat an uncited factual claim as a guardrail failure to flag.</p></div><h5>Likely follow-ups</h5><ul><li>How do you verify the citation supports the claim?</li><li>How do you cite a specific page?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Citations as decoration with no check that they back the claim.</div><h5>What to mention from the project</h5><ul><li>Id-tagged chunks</li><li>Page-level source snippets</li><li>Citation verification</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Grounded, cited generation is central to enterprise RAG.</p></div></div></div></details><details class="qcard" id="q10"><summary><span class="q-text"><span class="qx">Q10</span><span>How do you reduce hallucination?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Hallucination in document Q&A directly erodes trust.</p><h5>Model answer</h5><ul><li>Ground strictly in retrieved context; instruct 'answer only from the documents, else say you couldn't find it'.</li><li>Better retrieval (hybrid + rerank) so the right context is present.</li><li>Coverage gate — if top retrieval score is too low, abstain.</li><li>Require citations; verify faithfulness.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I make hallucination a tracked metric (sampled faithfulness judge) with a deploy gate, not a hope, and sample production traffic to keep measuring it.</p></div><h5>Likely follow-ups</h5><ul><li>What if retrieval returns nothing relevant?</li><li>How do you measure hallucination?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Trying to fix it with prompt wording like 'be accurate' alone.</div><h5>What to mention from the project</h5><ul><li>Cite-or-abstain</li><li>Coverage gate</li><li>Faithfulness as a metric</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Anti-hallucination grounding is the core RAG safety pattern.</p></div></div></div></details><details class="qcard" id="q11"><summary><span class="q-text"><span class="qx">Q11</span><span>How do you evaluate a RAG system?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">technical deep-dive</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Separates demo-builders from engineers who measure quality.</p><h5>Model answer</h5><p>Split the metrics. Retrieval: precision@k / recall@k on a golden set of question→source. Generation: groundedness, citation accuracy, hallucination rate, correctness. Also track latency p50/p95 and failed-ingestion rate.</p><p>Compare dense vs hybrid and with/without reranking; add a human feedback loop.</p><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I run eval as a gate (no change ships without passing the golden set), grow the set from real bad answers, and review failures to update chunking/retrieval — a closed loop.</p></div><h5>Likely follow-ups</h5><ul><li>How big a golden set?</li><li>How do you trust an LLM judge?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">'It looked right on a few questions.'</div><h5>What to mention from the project</h5><ul><li>Split retrieval vs generation metrics</li><li>Dense-vs-hybrid + rerank comparisons</li><li>Feedback loop</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">LLM-evaluation discipline — a strong seniority signal.</p></div></div></div></details><details class="qcard" id="q12"><summary><span class="q-text"><span class="qx">Q12</span><span>How do you handle document updates, deletion, and re-indexing?</span></span><span class="q-tags"><span class="qtag advanced">Advanced</span><span class="qtag ">system design</span><span class="qtag ">Senior</span></span></summary><div class="q-body"><h5>Why the interviewer asks this</h5><p>Freshness/lifecycle is what separates a one-shot demo from a real system.</p><h5>Model answer</h5><ul><li>Track each document + its chunks with ids so you can update/delete precisely.</li><li>On update: re-ingest the changed document, re-embed its chunks, replace them; on delete: remove its chunks (tombstone) so they leave search.</li><li>Invalidate caches for affected queries; record ingestion status per document.</li></ul><h5>Strong senior-level answer</h5><div class="senioranswer"><p>I do incremental re-indexing (only the changed document, not the whole corpus) and surface 'last updated' in citations so users can judge recency. Stale index is a silent trust-killer, so I monitor ingestion lag.</p></div><h5>Likely follow-ups</h5><ul><li>Full vs incremental re-index?</li><li>How do you avoid serving deleted-doc chunks from cache?</li></ul><h5>Red-flag answer pattern</h5><div class="redflag">Full re-index of everything on any change, or no deletion path.</div><h5>What to mention from the project</h5><ul><li>Per-document chunk ids</li><li>Incremental re-index + tombstoning</li><li>Cache invalidation</li></ul><h5>How to connect this to GenAI roles</h5><div class="callout note" style="margin:6px 0"><div class="c-ico">🔗</div><div class="c-body"><p style="margin:0">Index lifecycle = production RAG maturity.</p></div></div></div></details>
+<div class="page-nav"><a href="../projects/ats-resume-screening-assistant.html"><div class="dir">← Previous</div><div class="ttl">ATS Resume Screening Assistant</div></a><span></span></div>
+      </main>
+      <div class="toc-rail"><nav class="toc"><div class="toc-title">On this page</div><a href="#summary">Project summary</a><a href="#proves">What this proves in interviews</a><a href="#features">Core features</a><a href="#architecture">Architecture</a><a href="#stack">Tech stack</a><a href="#scaling">How it handles thousands of PDFs</a><a href="#latency">How to reduce latency & lag</a><a href="#api">API design</a><a href="#datamodel">Data model</a><a href="#eval">Evaluation plan</a><a href="#benchmark">Benchmarking & next steps</a><a href="#failures">Failure modes</a><a href="#guardrails">Guardrails & security</a><a href="#demo">3-minute demo script</a><a href="#readme">GitHub README structure</a><a href="#explain">How to explain it in interviews</a><a href="#questions">Interview questions</a></nav></div>
+    </div>
+  </div>
+</div>
+<script src="../assets/portal.js"></script>
+</body>
+</html>
